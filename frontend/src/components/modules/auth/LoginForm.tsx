@@ -27,14 +27,14 @@ export function LoginForm() {
   };
 
   return (
-    <section className="bg-white p-8 sm:p-10 lg:p-14 flex flex-col justify-between">
+    <section className="bg-white p-5 sm:p-8 md:p-10 lg:p-12 xl:p-14 flex flex-col justify-between order-1 lg:order-2 w-full">
       <div>
         {/* Form Header */}
-        <div className="mb-8">
-          <h2 className="text-[26px] sm:text-[28px] font-bold text-[#0F172A] tracking-tight mb-2">
+        <div className="mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-[28px] font-bold text-[#0F172A] tracking-tight mb-2">
             Đăng nhập Tài khoản
           </h2>
-          <p className="text-[13.5px] text-[#64748B] leading-relaxed">
+          <p className="text-[13px] sm:text-[13.5px] text-[#64748B] leading-relaxed max-w-prose">
             Nhập thông tin tài khoản Rolly Academy để bắt đầu phiên luyện tập và đánh giá năng lực.
           </p>
         </div>
@@ -42,7 +42,7 @@ export function LoginForm() {
         {submitted && (
           <div className="mb-5 p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-sm flex items-center gap-2">
             <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-            <span>Đăng nhập thành công! Đang chuyển hướng vào phòng thực hành...</span>
+            <span className="text-[13px] sm:text-sm">Đăng nhập thành công! Đang chuyển hướng vào phòng thực hành...</span>
           </div>
         )}
 
@@ -50,7 +50,7 @@ export function LoginForm() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* 1. Email doanh nghiệp */}
           <div>
-            <label className="block text-[11px] font-bold tracking-[0.08em] uppercase text-[#1E293B] mb-2">
+            <label className="block text-[11px] font-bold tracking-[0.08em] uppercase text-[#1E293B] mb-1.5 sm:mb-2">
               EMAIL DOANH NGHIỆP (WORK EMAIL) <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -63,21 +63,21 @@ export function LoginForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="hoanglong.sommelier@thelandmark.com"
-                className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-[14px] text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition"
+                className="w-full min-h-[46px] pl-10 pr-4 py-2.5 sm:py-3 bg-white border border-[#E2E8F0] rounded-xl text-[14px] text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition"
               />
             </div>
           </div>
 
           {/* 2. Mật khẩu bảo mật & Quên mật khẩu */}
           <div>
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-1.5 sm:mb-2">
               <label className="text-[11px] font-bold tracking-[0.08em] uppercase text-[#1E293B]">
                 MẬT KHẨU BẢO MẬT <span className="text-red-500">*</span>
               </label>
               <a 
                 href="#" 
                 onClick={(e) => { e.preventDefault(); alert("Vui lòng liên hệ Quản trị viên chi nhánh của bạn để đặt lại mật khẩu."); }}
-                className="text-[12.5px] font-medium text-[#A67C1E] hover:underline"
+                className="text-[12px] sm:text-[12.5px] font-medium text-[#A67C1E] hover:underline min-h-[32px] flex items-center"
               >
                 Quên mật khẩu?
               </a>
@@ -92,12 +92,13 @@ export function LoginForm() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••••••"
-                className="w-full pl-10 pr-10 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-[14px] text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition"
+                className="w-full min-h-[46px] pl-10 pr-11 py-2.5 sm:py-3 bg-white border border-[#E2E8F0] rounded-xl text-[14px] text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition"
               />
               <button
                 type="button"
+                aria-label={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#94A3B8] hover:text-[#475569] transition cursor-pointer"
+                className="absolute inset-y-0 right-0 w-11 flex items-center justify-center text-[#94A3B8] hover:text-[#475569] transition cursor-pointer"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -105,17 +106,17 @@ export function LoginForm() {
           </div>
 
           {/* 3. Checkbox Ghi nhớ đăng nhập */}
-          <div className="pt-1">
-            <label className="flex items-center gap-2.5 cursor-pointer select-none">
+          <div className="pt-0.5">
+            <label className="min-h-[44px] flex items-center gap-2.5 cursor-pointer select-none">
               <div 
                 onClick={() => setRememberMe(!rememberMe)}
-                className={`w-4 h-4 rounded flex items-center justify-center transition border ${
+                className={`w-5 h-5 rounded flex items-center justify-center transition border shrink-0 ${
                   rememberMe 
                     ? "bg-[#C69214] border-[#C69214] text-white" 
                     : "bg-white border-[#CBD5E1]"
                 }`}
               >
-                {rememberMe && <Check className="w-3 h-3 stroke-[3]" />}
+                {rememberMe && <Check className="w-3.5 h-3.5 stroke-[3]" />}
               </div>
               <span className="text-[13px] text-[#475569]">
                 Ghi nhớ đăng nhập trên thiết bị này
@@ -124,19 +125,19 @@ export function LoginForm() {
           </div>
 
           {/* 4. Nút Đăng nhập chính */}
-          <div className="pt-2">
+          <div className="pt-1">
             <button
               type="submit"
-              className="w-full py-3.5 px-4 bg-[#C69214] hover:bg-[#B38210] active:scale-[0.99] text-white font-bold rounded-xl text-center tracking-[0.08em] text-[13.5px] uppercase transition shadow-[0_4px_16px_rgba(198,146,20,0.28)] cursor-pointer"
+              className="w-full min-h-[48px] py-3.5 px-4 bg-[#C69214] hover:bg-[#B38210] active:scale-[0.99] text-white font-bold rounded-xl text-center tracking-[0.08em] text-[13px] sm:text-[13.5px] uppercase transition shadow-[0_4px_16px_rgba(198,146,20,0.28)] cursor-pointer flex items-center justify-center"
             >
               ĐĂNG NHẬP
             </button>
           </div>
 
           {/* 5. Dòng phân cách OR */}
-          <div className="relative my-5 flex items-center justify-center">
+          <div className="relative my-4 sm:my-5 flex items-center justify-center">
             <div className="border-t border-[#E2E8F0] w-full"></div>
-            <span className="bg-white px-3 text-[10.5px] tracking-[0.16em] font-semibold text-[#94A3B8] uppercase whitespace-nowrap">
+            <span className="bg-white px-3 text-[10px] sm:text-[10.5px] tracking-[0.16em] font-semibold text-[#94A3B8] uppercase whitespace-nowrap">
               HOẶC ĐĂNG NHẬP VỚI
             </span>
             <div className="border-t border-[#E2E8F0] w-full"></div>
@@ -147,9 +148,9 @@ export function LoginForm() {
             <button
               type="button"
               onClick={handleGoogleLogin}
-              className="w-full py-2.5 px-4 bg-white hover:bg-slate-50 border border-[#E2E8F0] rounded-xl text-[13.5px] font-semibold text-[#1E293B] flex items-center justify-center gap-3 transition cursor-pointer shadow-2xs"
+              className="w-full min-h-[48px] py-2.5 sm:py-3 px-4 bg-white hover:bg-slate-50 border border-[#E2E8F0] rounded-xl text-[13px] sm:text-[13.5px] font-semibold text-[#1E293B] flex items-center justify-center gap-3 transition cursor-pointer shadow-2xs"
             >
-              <svg className="w-4 h-4" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                 <path
                   fill="#4285F4"
                   d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -174,9 +175,9 @@ export function LoginForm() {
       </div>
 
       {/* Bottom Form Footer Link */}
-      <div className="pt-8 text-center text-[13.5px] text-[#64748B]">
+      <div className="pt-6 sm:pt-8 text-center text-[13px] sm:text-[13.5px] text-[#64748B]">
         Chưa có tài khoản nhân sự?{" "}
-        <Link href={APP_ROUTES.REGISTER} className="font-semibold text-[#A67C1E] hover:underline">
+        <Link href={APP_ROUTES.REGISTER} className="font-semibold text-[#A67C1E] hover:underline inline-block min-h-[36px] py-1">
           Đăng ký ngay
         </Link>
       </div>

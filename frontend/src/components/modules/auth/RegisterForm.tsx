@@ -28,14 +28,14 @@ export function RegisterForm() {
   };
 
   return (
-    <section className="bg-white p-8 sm:p-10 lg:p-12 flex flex-col justify-between">
+    <section className="bg-white p-5 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between order-1 lg:order-2 w-full">
       <div>
         {/* Form Header */}
-        <div className="mb-6">
-          <h2 className="text-[26px] sm:text-[28px] font-bold text-[#0F172A] tracking-tight mb-1.5">
+        <div className="mb-5 sm:mb-6">
+          <h2 className="text-2xl sm:text-[28px] font-bold text-[#0F172A] tracking-tight mb-1.5">
             Tạo tài khoản Đào tạo
           </h2>
-          <p className="text-[13.5px] text-[#64748B] leading-relaxed">
+          <p className="text-[13px] sm:text-[13.5px] text-[#64748B] leading-relaxed max-w-prose">
             Đăng ký tài khoản để truy cập phòng luyện tập AI và giáo trình SOP độc quyền của cơ sở.
           </p>
         </div>
@@ -43,15 +43,15 @@ export function RegisterForm() {
         {submitted && (
           <div className="mb-5 p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-sm flex items-center gap-2">
             <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-            <span>Đăng ký thành công! Đang chuyển hướng vào phòng đào tạo...</span>
+            <span className="text-[13px] sm:text-sm">Đăng ký thành công! Đang chuyển hướng vào phòng đào tạo...</span>
           </div>
         )}
 
         {/* Registration Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
           {/* 1. Họ và tên */}
           <div>
-            <label className="block text-[13px] font-medium text-[#1E293B] mb-1.5">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#1E293B] mb-1.5">
               Họ và tên nhân viên <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -64,14 +64,14 @@ export function RegisterForm() {
                 value={formData.fullName}
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 placeholder="Nguyễn Hoàng Long"
-                className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-[14px] text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition"
+                className="w-full min-h-[46px] pl-10 pr-4 py-2.5 sm:py-3 bg-white border border-[#E2E8F0] rounded-xl text-[14px] text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition"
               />
             </div>
           </div>
 
           {/* 2. Email doanh nghiệp */}
           <div>
-            <label className="block text-[13px] font-medium text-[#1E293B] mb-1.5">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#1E293B] mb-1.5">
               Email doanh nghiệp (Work Email) <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -84,7 +84,7 @@ export function RegisterForm() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="hoanglong.sommelier@thelandmark.com"
-                className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-[14px] text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition"
+                className="w-full min-h-[46px] pl-10 pr-4 py-2.5 sm:py-3 bg-white border border-[#E2E8F0] rounded-xl text-[14px] text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition"
               />
             </div>
           </div>
@@ -92,14 +92,14 @@ export function RegisterForm() {
           {/* 3. Chi nhánh & Vị trí chuyên môn (2 Cột) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
-              <label className="block text-[13px] font-medium text-[#1E293B] mb-1.5">
+              <label className="block text-[12px] sm:text-[13px] font-medium text-[#1E293B] mb-1.5">
                 Chi nhánh hoạt động <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <select
                   value={formData.branch}
                   onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
-                  className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-[13px] text-[#0F172A] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition truncate cursor-pointer"
+                  className="w-full min-h-[46px] appearance-none pl-3.5 pr-8 py-2.5 sm:py-3 bg-white border border-[#E2E8F0] rounded-xl text-[13px] sm:text-[13.5px] text-[#0F172A] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition truncate cursor-pointer"
                 >
                   <option>The Landmark Dining Lounge</option>
                   <option>Michelin Star Bistro</option>
@@ -113,14 +113,14 @@ export function RegisterForm() {
             </div>
 
             <div>
-              <label className="block text-[13px] font-medium text-[#1E293B] mb-1.5">
+              <label className="block text-[12px] sm:text-[13px] font-medium text-[#1E293B] mb-1.5">
                 Vị trí chuyên môn <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <select
                   value={formData.position}
                   onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-                  className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-[13px] text-[#0F172A] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition truncate cursor-pointer"
+                  className="w-full min-h-[46px] appearance-none pl-3.5 pr-8 py-2.5 sm:py-3 bg-white border border-[#E2E8F0] rounded-xl text-[13px] sm:text-[13.5px] text-[#0F172A] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition truncate cursor-pointer"
                 >
                   <option>Head Sommelier (Chuyên gia Rượu)</option>
                   <option>Captain (Trưởng ca Phục vụ)</option>
@@ -138,7 +138,7 @@ export function RegisterForm() {
           {/* 4. Mật khẩu bảo mật */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-[13px] font-medium text-[#1E293B]">
+              <label className="text-[12px] sm:text-[13px] font-medium text-[#1E293B]">
                 Mật khẩu bảo mật <span className="text-red-500">*</span>
               </label>
               <span className="text-[11px] text-[#94A3B8]">
@@ -155,12 +155,13 @@ export function RegisterForm() {
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 placeholder="••••••••••••"
-                className="w-full pl-10 pr-10 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-[14px] text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition"
+                className="w-full min-h-[46px] pl-10 pr-11 py-2.5 sm:py-3 bg-white border border-[#E2E8F0] rounded-xl text-[14px] text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#C69214] focus:ring-2 focus:ring-[#C69214]/15 transition"
               />
               <button
                 type="button"
+                aria-label={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#94A3B8] hover:text-[#475569] transition cursor-pointer"
+                className="absolute inset-y-0 right-0 w-11 flex items-center justify-center text-[#94A3B8] hover:text-[#475569] transition cursor-pointer"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -168,29 +169,29 @@ export function RegisterForm() {
           </div>
 
           {/* 5. Checkbox cam kết SOP */}
-          <div className="pt-1">
-            <label className="flex items-start gap-2.5 cursor-pointer select-none">
+          <div className="pt-0.5">
+            <label className="min-h-[44px] flex items-start gap-2.5 cursor-pointer select-none py-1">
               <div 
                 onClick={() => setAgreed(!agreed)}
-                className={`w-4 h-4 rounded mt-0.5 flex items-center justify-center transition border ${
+                className={`w-5 h-5 rounded mt-0.5 flex items-center justify-center transition border shrink-0 ${
                   agreed 
                     ? "bg-[#C69214] border-[#C69214] text-white" 
                     : "bg-white border-[#CBD5E1]"
                 }`}
               >
-                {agreed && <Check className="w-3 h-3 stroke-[3]" />}
+                {agreed && <Check className="w-3.5 h-3.5 stroke-[3]" />}
               </div>
-              <span className="text-[12.5px] text-[#64748B] leading-snug">
+              <span className="text-[12px] sm:text-[12.5px] text-[#64748B] leading-snug break-words">
                 Tôi đồng ý tuân thủ cam kết bảo mật tiêu chuẩn SOP và quy định bảo mật dữ liệu khách hàng VIP của nhà hàng.
               </span>
             </label>
           </div>
 
           {/* 6. Nút Submit */}
-          <div className="pt-2">
+          <div className="pt-1">
             <button
               type="submit"
-              className="w-full py-3.5 px-4 bg-[#C69214] hover:bg-[#B38210] active:scale-[0.99] text-white font-bold rounded-xl text-center tracking-[0.06em] text-[13.5px] uppercase transition shadow-[0_4px_16px_rgba(198,146,20,0.28)] cursor-pointer"
+              className="w-full min-h-[48px] py-3.5 px-4 bg-[#C69214] hover:bg-[#B38210] active:scale-[0.99] text-white font-bold rounded-xl text-center tracking-[0.06em] text-[13px] sm:text-[13.5px] uppercase transition shadow-[0_4px_16px_rgba(198,146,20,0.28)] cursor-pointer flex items-center justify-center"
             >
               HOÀN TẤT ĐĂNG KÝ HỌC VIÊN
             </button>
@@ -199,13 +200,12 @@ export function RegisterForm() {
       </div>
 
       {/* Bottom Form Footer Link */}
-      <div className="pt-6 text-center text-[13.5px] text-[#64748B]">
+      <div className="pt-6 text-center text-[13px] sm:text-[13.5px] text-[#64748B]">
         Đã có tài khoản nhân sự?{" "}
-        <Link href={APP_ROUTES.LOGIN} className="font-semibold text-[#A67C1E] hover:underline">
+        <Link href={APP_ROUTES.LOGIN} className="font-semibold text-[#A67C1E] hover:underline inline-block min-h-[36px] py-1">
           Đăng nhập ngay
         </Link>
       </div>
     </section>
   );
 }
-
