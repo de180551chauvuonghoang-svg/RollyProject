@@ -6,3 +6,4 @@ export const APP_ROUTES = {
   ROLEPLAY: "/roleplay",
   DASHBOARD: "/dashboard",
 } as const;
+
