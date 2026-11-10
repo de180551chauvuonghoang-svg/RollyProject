@@ -66,3 +66,4 @@ export function ClientHeader({ breadcrumb, onOpenSidebar }: ClientHeaderProps) {
     </header>
   );
 }
+

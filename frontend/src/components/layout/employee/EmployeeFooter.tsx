@@ -9,3 +9,4 @@ export function EmployeeFooter() {
     </footer>
   );
 }
+

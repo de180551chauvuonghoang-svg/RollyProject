@@ -9,3 +9,4 @@ export function ClientFooter() {
     </footer>
   );
 }
+

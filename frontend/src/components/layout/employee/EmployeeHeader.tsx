@@ -49,3 +49,4 @@ export function EmployeeHeader({ breadcrumb, onOpenSidebar }: EmployeeHeaderProp
     </header>
   );
 }
+

@@ -168,3 +168,4 @@ export function ClientSidebar({ isOpen, onClose }: ClientSidebarProps) {
     </>
   );
 }
+

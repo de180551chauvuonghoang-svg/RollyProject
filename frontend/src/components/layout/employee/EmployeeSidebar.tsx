@@ -175,3 +175,4 @@ export function EmployeeSidebar({ isOpen, onClose }: EmployeeSidebarProps) {
     </>
   );
 }
+
