@@ -1,54 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <defs>
-    <!-- Background Luxury Gradient -->
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FFFDF9" />
-      <stop offset="50%" stop-color="#FBF4E4" />
-      <stop offset="100%" stop-color="#F3E5C4" />
+    <linearGradient id="iconBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBF2"/>
+      <stop offset="50%" stop-color="#F8ECCB"/>
+      <stop offset="100%" stop-color="#E9CE8B"/>
     </linearGradient>
-
-    <!-- Gold Border Gradient -->
-    <linearGradient id="goldBorder" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#E5C77A" />
-      <stop offset="50%" stop-color="#C69214" />
-      <stop offset="100%" stop-color="#936806" />
+    <linearGradient id="iconGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E2BD63"/>
+      <stop offset="50%" stop-color="#C69214"/>
+      <stop offset="100%" stop-color="#8C6005"/>
     </linearGradient>
-
-    <!-- Gold Letter Gradient -->
-    <linearGradient id="goldLetter" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#C69214" />
-      <stop offset="100%" stop-color="#8F6305" />
+    <linearGradient id="iconStar" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#DFC88A"/>
     </linearGradient>
-
-    <!-- Star Glow -->
-    <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#FFE8A3" />
-      <stop offset="100%" stop-color="#C69214" />
-    </radialGradient>
+    <filter id="iconShadow" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#0F172A" flood-opacity="0.12"/>
+    </filter>
   </defs>
 
-  <!-- Squircle Base with Soft Shadow -->
-  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#bgGrad)" stroke="url(#goldBorder)" stroke-width="2.5" />
+  <!-- Luxury Squircle Badge -->
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#iconBg)" stroke="#DFC88A" stroke-width="2" filter="url(#iconShadow)"/>
 
-  <!-- Inner Elegant Border -->
-  <rect x="6" y="6" width="52" height="52" rx="12" fill="none" stroke="#E6D3A3" stroke-width="0.8" opacity="0.6" />
+  <!-- Inner Subtle Accent Ring -->
+  <rect x="7" y="7" width="50" height="50" rx="13" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.7"/>
 
-  <!-- Letter R (Serif Luxury Style) -->
-  <text 
-    x="31" 
-    y="44" 
-    font-family="'Playfair Display', 'Cinzel', 'Georgia', 'Times New Roman', serif" 
-    font-size="34" 
-    font-weight="700" 
-    fill="url(#goldLetter)" 
-    text-anchor="middle"
-    letter-spacing="-0.5"
-  >R</text>
+  <!-- Distinct Rolly Monogram R -->
+  <path d="M21 16C21 15.4477 21.4477 15 22 15H32C36.9706 15 41 19.0294 41 24C41 28.1561 38.1882 31.6562 34.3444 32.6738L41.77 44.5553C42.1265 45.1257 41.7166 45.8571 41.0478 45.8571H36.2155C35.6981 45.8571 35.2198 45.5784 34.9684 45.1257L27.9 33H25.5V45C25.5 45.5523 25.0523 46 24.5 46H22C21.4477 46 21 45.5523 21 45V16Z" fill="url(#iconGold)"/>
+  
+  <!-- Counter of R -->
+  <path d="M25.5 19.5V28.5H32C34.4853 28.5 36.5 26.4853 36.5 24C36.5 21.5147 34.4853 19.5 32 19.5H25.5Z" fill="#FFFDF8"/>
 
-  <!-- Little Golden 5-Point Star in Top-Right Corner -->
-  <polygon 
-    points="47,12 48.5,15.5 52,16 49.5,18.5 50,22 47,20.2 44,22 44.5,18.5 42,16 45.5,15.5" 
-    fill="url(#starGlow)" 
-  />
+  <!-- Michelin Sparkle Star -->
+  <path d="M44 12L45.2 14.7L47.9 15.9L45.2 17.1L44 19.8L42.8 17.1L40.1 15.9L42.8 14.7L44 12Z" fill="url(#iconStar)"/>
 </svg>
-

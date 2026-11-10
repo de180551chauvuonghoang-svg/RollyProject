@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBF2"/>
+      <stop offset="50%" stop-color="#F8ECCB"/>
+      <stop offset="100%" stop-color="#E9CE8B"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E2BD63"/>
+      <stop offset="50%" stop-color="#C69214"/>
+      <stop offset="100%" stop-color="#8C6005"/>
+    </linearGradient>
+    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF6D9"/>
+      <stop offset="100%" stop-color="#DFC88A"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Icon Squircle -->
+  <rect x="6" y="6" width="48" height="48" rx="14" fill="url(#bgGrad)" stroke="#DFC88A" stroke-width="1.5" filter="url(#shadow)"/>
+
+  <!-- Distinct Rolly Monogram R -->
+  <path d="M22 17C22 16.4477 22.4477 16 23 16H31C34.866 16 38 19.134 38 23C38 26.2323 35.808 28.9525 32.8122 29.7458L38.6 39.026C38.878 39.4708 38.5584 40 38.0366 40H34.2678C33.8643 40 33.4913 39.7826 33.2952 39.4334L27.75 30H25.5V39C25.5 39.5523 25.0523 40 24.5 40H23C22.4477 40 22 39.5523 22 39V17Z" fill="url(#goldGrad)"/>
+  
+  <!-- Counter of R -->
+  <path d="M25.5 19.5V26.5H31C32.933 26.5 34.5 24.933 34.5 23C34.5 21.067 32.933 19.5 31 19.5H25.5Z" fill="#FFFDF8"/>
+
+  <!-- Michelin Sparkle Star -->
+  <path d="M40 14L40.8 15.8L42.6 16.6L40.8 17.4L40 19.2L39.2 17.4L37.4 16.6L39.2 15.8L40 14Z" fill="url(#starGrad)"/>
+
+  <!-- Wordmark Text -->
+  <text x="66" y="34" font-family="'Playfair Display', serif, Georgia" font-size="24" font-weight="700" fill="#0F172A" letter-spacing="-0.5">Rolly</text>
+  <text x="130" y="34" font-family="'Playfair Display', serif, Georgia" font-size="20" font-weight="300" fill="#A67C1E" letter-spacing="0.5">Academy</text>
+  <text x="67" y="46" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#8C6005" letter-spacing="2.2">HOSPITALITY EXCELLENCE SUITE</text>
+</svg>

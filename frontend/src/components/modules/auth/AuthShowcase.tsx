@@ -2,24 +2,15 @@
 
 import React from "react";
 import { Mic, RefreshCw } from "lucide-react";
+import { RollyLogo } from "@/components/common/RollyLogo";
 
 export function AuthShowcase() {
   return (
     <section className="bg-gradient-to-b from-[#FEFCF7] via-[#FBF5E6] to-[#F7EDD6] p-5 sm:p-8 lg:p-12 flex flex-col justify-between border-t lg:border-t-0 lg:border-r border-[#EFE8DA] order-2 lg:order-1">
       <div>
-        {/* Badge Rolly */}
-        <div className="flex items-center gap-3 mb-5 sm:mb-8">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-[#FDF9EE] to-[#F5EACB] border border-[#DFC88A] flex items-center justify-center shadow-xs text-[#C29324] text-lg sm:text-xl font-bold shrink-0">
-            ★
-          </div>
-          <div className="min-w-0">
-            <h3 className="font-serif font-bold text-sm sm:text-base tracking-[0.16em] sm:tracking-[0.18em] text-[#0F172A] uppercase truncate">
-              ROLLY
-            </h3>
-            <p className="text-[9.5px] sm:text-[10px] tracking-[0.16em] sm:tracking-[0.2em] font-bold text-[#A67C1E] uppercase mt-0.5 truncate">
-              HOSPITALITY EXCELLENCE SUITE
-            </p>
-          </div>
+        {/* Brand Logo Rolly */}
+        <div className="mb-5 sm:mb-8">
+          <RollyLogo size="lg" subtitle="HOSPITALITY EXCELLENCE SUITE" />
         </div>
 
         {/* Headline */}

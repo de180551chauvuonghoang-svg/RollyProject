@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { APP_ROUTES } from "@/constants/routes";
+import { RollyLogo } from "@/components/common/RollyLogo";
 
 interface NavItem {
   label: string;
@@ -64,23 +65,7 @@ export function EmployeeSidebar({ isOpen, onClose }: EmployeeSidebarProps) {
         <div>
           {/* Header Row: Brand Logo + Mobile Close Button */}
           <div className="flex items-center justify-between mb-4">
-            <Link 
-              href="/courses" 
-              onClick={onClose}
-              className="flex items-center gap-2.5 px-2 py-1 group"
-            >
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FDF9EE] to-[#F5EACB] border border-[#DFC88A] flex items-center justify-center text-[#C29324] text-base font-bold shadow-2xs group-hover:scale-105 transition">
-                ★
-              </div>
-              <div>
-                <span className="font-serif font-bold text-lg text-[#0F172A] tracking-tight block leading-tight">
-                  Rolly Academy
-                </span>
-                <span className="text-[10px] text-[#A67C1E] font-bold tracking-wider uppercase">
-                  Employee Portal
-                </span>
-              </div>
-            </Link>
+            <RollyLogo href="/courses" size="md" subtitle="Employee Portal" />
 
             {/* Mobile close button */}
             <button
