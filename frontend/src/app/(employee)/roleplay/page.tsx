@@ -15,7 +15,7 @@ import {
   Sparkles,
   RotateCcw
 } from "lucide-react";
-import { PortalHeader } from "@/components/layout/PortalHeader";
+import { EmployeeHeader } from "@/components/layout/employee/EmployeeHeader";
 
 interface ScenarioItem {
   id: string;
@@ -126,7 +126,7 @@ export function RoleplayPage() {
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <PortalHeader breadcrumb="Kịch bản Role - Play" />
+      <EmployeeHeader breadcrumb="Kịch bản Role - Play" />
 
       {/* 1. Header Title & History Action */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">

@@ -2,16 +2,16 @@
 
 import React from "react";
 import { SidebarProvider, useSidebar } from "@/context/SidebarContext";
-import { PortalSidebar } from "@/components/layout/PortalSidebar";
-import { PortalFooter } from "@/components/layout/PortalFooter";
+import { ClientSidebar } from "@/components/layout/client/ClientSidebar";
+import { ClientFooter } from "@/components/layout/client/ClientFooter";
 
-function DashboardContent({ children }: { children: React.ReactNode }) {
+function ClientLayoutContent({ children }: { children: React.ReactNode }) {
   const { isOpen, closeSidebar } = useSidebar();
 
   return (
     <div className="min-h-screen flex bg-[#F8FAFC]">
       {/* Sidebar: Responsive drawer on mobile, fixed column on md+ */}
-      <PortalSidebar isOpen={isOpen} onClose={closeSidebar} />
+      <ClientSidebar isOpen={isOpen} onClose={closeSidebar} />
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
@@ -20,7 +20,7 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
             {children}
           </div>
           <div className="w-full max-w-[1400px] mx-auto mt-8">
-            <PortalFooter />
+            <ClientFooter />
           </div>
         </main>
       </div>
@@ -28,14 +28,14 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function DashboardLayout({
+export default function ClientLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <SidebarProvider>
-      <DashboardContent>{children}</DashboardContent>
+      <ClientLayoutContent>{children}</ClientLayoutContent>
     </SidebarProvider>
   );
 }

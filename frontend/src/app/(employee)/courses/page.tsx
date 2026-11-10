@@ -12,7 +12,7 @@ import {
   BookOpen,
   Filter
 } from "lucide-react";
-import { PortalHeader } from "@/components/layout/PortalHeader";
+import { EmployeeHeader } from "@/components/layout/employee/EmployeeHeader";
 
 interface CourseItem {
   id: string;
@@ -109,7 +109,7 @@ export function CoursesPage() {
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <PortalHeader breadcrumb="Học tập & Tài liệu" />
+      <EmployeeHeader breadcrumb="Học tập & Tài liệu" />
 
       {/* 1. Welcome & Stats Banner */}
       <section className="bg-white rounded-2xl p-4 sm:p-6 lg:p-8 border border-[#EAE5D9] shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6">
