@@ -2,10 +2,12 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Mail, Lock, Eye, EyeOff, Check } from "lucide-react";
 import { APP_ROUTES } from "@/constants/routes";
 
 export function LoginForm() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [email, setEmail] = useState("hoanglong.sommelier@thelandmark.com");
@@ -15,11 +17,13 @@ export function LoginForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setTimeout(() => {
+      router.push("/courses");
+    }, 800);
   };
 
   const handleGoogleLogin = () => {
-    alert("Đang chuyển hướng sang cổng xác thực Google Workspace của doanh nghiệp...");
+    router.push("/courses");
   };
 
   return (
@@ -145,7 +149,6 @@ export function LoginForm() {
               onClick={handleGoogleLogin}
               className="w-full py-2.5 px-4 bg-white hover:bg-slate-50 border border-[#E2E8F0] rounded-xl text-[13.5px] font-semibold text-[#1E293B] flex items-center justify-center gap-3 transition cursor-pointer shadow-2xs"
             >
-              {/* Google Colorful Logo SVG */}
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path
                   fill="#4285F4"
@@ -180,4 +183,3 @@ export function LoginForm() {
     </section>
   );
 }
-
