@@ -15,8 +15,15 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Đăng ký Học viên - Rolly Academy",
-  description: "Hệ thống Đào tạo & Đánh giá Nền tảng F&B bằng AI",
+  title: "Rolly Academy - Hệ thống Đào tạo & Đánh giá F&B bằng AI",
+  description: "Nền tảng đào tạo nhập vai thời gian thực bằng AI Voice Persona tiêu chuẩn 5 sao quốc tế",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" }
+    ],
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
