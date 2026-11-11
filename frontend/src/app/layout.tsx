@@ -33,7 +33,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi" className={`${plusJakartaSans.variable} ${playfairDisplay.variable} h-full antialiased`}>
-      <body className="min-h-full font-sans bg-[#F8FAFC] text-[#0F172A] flex flex-col justify-between">
+      <body className="h-full font-sans bg-[#F8FAFC] text-[#0F172A]">
         {children}
       </body>
     </html>
