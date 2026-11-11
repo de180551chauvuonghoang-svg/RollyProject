@@ -53,11 +53,11 @@ export function EmployeeSidebar({ isOpen, onClose }: EmployeeSidebarProps) {
         />
       )}
 
-      {/* Sidebar Container */}
+      {/* Sidebar Container: Sticky on desktop (h-screen) so it never leaves blank gaps when scrolling */}
       <aside 
         className={cn(
-          "w-64 bg-white border-r border-[#EFEBE3] flex flex-col justify-between p-4 shrink-0 transition-transform duration-300 z-50",
-          "fixed inset-y-0 left-0 h-full overflow-y-auto md:static md:translate-x-0 md:min-h-screen",
+          "w-64 bg-white border-r border-[#EFEBE3] flex flex-col justify-between p-4 shrink-0 transition-transform duration-300 z-40",
+          "fixed inset-y-0 left-0 h-full overflow-y-auto md:sticky md:top-0 md:h-screen md:translate-x-0",
           isOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full md:translate-x-0"
         )}
       >

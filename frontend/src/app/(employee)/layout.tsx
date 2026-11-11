@@ -10,8 +10,8 @@ function EmployeeLayoutContent({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex bg-[#F8FAFC]">
-      {/* Sidebar: Responsive drawer on mobile, fixed column on md+ */}
-      <Suspense fallback={<div className="w-64 bg-[#0F172A] hidden md:block" />}>
+      {/* Sidebar: Responsive drawer on mobile, sticky fixed column on md+ */}
+      <Suspense fallback={<div className="w-64 bg-white border-r border-[#EFEBE3] hidden md:block" />}>
         <EmployeeSidebar isOpen={isOpen} onClose={closeSidebar} />
       </Suspense>
 
