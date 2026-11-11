@@ -15,7 +15,8 @@ import {
   ExternalLink,
   Award,
   Sparkles,
-  HelpCircle
+  HelpCircle,
+  LogOut
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { APP_ROUTES } from "@/constants/routes";
@@ -180,14 +181,35 @@ export function EmployeeSidebar({ isOpen, onClose }: EmployeeSidebarProps) {
             </div>
           </div>
 
-          {/* Quick link to Client Portal (Elevated to avoid being hidden by dev badges) */}
+          {/* Quick link to Client Portal */}
           <Link
             href={APP_ROUTES.CLIENT_DASHBOARD}
-            className="w-full py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-[12px] font-semibold flex items-center justify-between transition min-h-[40px] shadow-xs"
+            className="w-full py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11.5px] font-medium flex items-center justify-between transition min-h-[38px]"
           >
             <span>Client Portal (Quản lý)</span>
-            <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+            <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
           </Link>
+
+          {/* User Profile Card & Logout: Nguyễn Hoàng Long (Head Sommelier Resident) */}
+          <div className="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200/80">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#1E293B] to-[#0F172A] text-amber-200 font-bold text-xs flex items-center justify-center shrink-0 ring-1 ring-[#C69214]/50 shadow-xs">
+                NL
+              </div>
+              <div className="truncate">
+                <div className="font-bold text-xs text-[#0F172A] truncate">Nguyễn Hoàng Long</div>
+                <div className="text-[10.5px] text-[#A67C1E] font-medium truncate">Head Sommelier Resident</div>
+              </div>
+            </div>
+
+            <Link
+              href={APP_ROUTES.LOGIN}
+              className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg transition"
+              title="Đăng xuất"
+            >
+              <LogOut className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </aside>
     </>
