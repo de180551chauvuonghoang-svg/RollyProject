@@ -5,11 +5,11 @@ import { ChevronRight, User, Menu } from "lucide-react";
 import { useSidebar } from "@/context/SidebarContext";
 
 interface EmployeeHeaderProps {
-  breadcrumb: string;
+  breadcrumb?: string;
   onOpenSidebar?: () => void;
 }
 
-export function EmployeeHeader({ breadcrumb, onOpenSidebar }: EmployeeHeaderProps) {
+export function EmployeeHeader({ breadcrumb = "Cổng nhân viên & Đào tạo SOP", onOpenSidebar }: EmployeeHeaderProps) {
   const { openSidebar } = useSidebar();
   const handleOpen = onOpenSidebar || openSidebar;
 

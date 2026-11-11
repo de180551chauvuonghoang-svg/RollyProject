@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { 
   Search, 
   ChevronDown, 
@@ -13,6 +14,7 @@ import {
   Filter
 } from "lucide-react";
 import { EmployeeHeader } from "@/components/layout/employee/EmployeeHeader";
+import { APP_ROUTES } from "@/constants/routes";
 
 interface CourseItem {
   id: string;
@@ -254,23 +256,21 @@ export function CoursesPage() {
 
             {/* Bottom Actions */}
             <div className="p-4 sm:p-5 pt-0 grid grid-cols-2 gap-2.5">
-              <button 
-                type="button"
-                onClick={() => alert(`Đang mở tài liệu: ${course.title}`)}
+              <Link 
+                href={APP_ROUTES.EMPLOYEE_COURSE_DETAIL(course.id)}
                 className="min-h-[42px] py-2 px-3 bg-white hover:bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl text-[12px] sm:text-[12.5px] font-semibold text-[#1E293B] flex items-center justify-center gap-1.5 transition cursor-pointer"
               >
                 {course.type === "video" ? <Play className="w-3.5 h-3.5 text-[#C69214]" /> : <FileText className="w-3.5 h-3.5 text-[#C69214]" />}
                 <span>{course.type === "video" ? "Xem Video" : "Đọc PDF"}</span>
-              </button>
+              </Link>
 
-              <button 
-                type="button"
-                onClick={() => alert(`Bắt đầu bài kiểm tra cho: ${course.code}`)}
+              <Link 
+                href={APP_ROUTES.EMPLOYEE_QUIZ(course.id)}
                 className="min-h-[42px] py-2 px-3 bg-[#C69214] hover:bg-[#B38210] active:scale-[0.99] text-white rounded-xl text-[12px] sm:text-[12.5px] font-bold flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer"
               >
                 <Award className="w-3.5 h-3.5" />
                 <span>Kiểm tra</span>
-              </button>
+              </Link>
             </div>
           </div>
         ))}

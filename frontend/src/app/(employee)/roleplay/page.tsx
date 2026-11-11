@@ -16,6 +16,7 @@ import {
   RotateCcw
 } from "lucide-react";
 import { EmployeeHeader } from "@/components/layout/employee/EmployeeHeader";
+import { APP_ROUTES } from "@/constants/routes";
 
 interface ScenarioItem {
   id: string;
@@ -342,32 +343,29 @@ export function RoleplayPage() {
 
               {scenario.recordScore !== null ? (
                 <div className="grid grid-cols-2 gap-2">
-                  <button 
-                    type="button"
-                    onClick={() => alert(`Bắt đầu luyện tập lại: ${scenario.title}`)}
+                  <Link 
+                    href={APP_ROUTES.EMPLOYEE_PRACTICE(scenario.id)}
                     className="min-h-[44px] py-2.5 px-3 bg-[#C69214] hover:bg-[#B38210] active:scale-[0.99] text-white rounded-xl text-[12px] sm:text-[12.5px] font-bold flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer"
                   >
                     <Play className="w-3.5 h-3.5 fill-current" />
                     <span>Luyện tập</span>
-                  </button>
-                  <button 
-                    type="button"
-                    onClick={() => alert(`Xem lại phiên trước: ${scenario.title}`)}
+                  </Link>
+                  <Link 
+                    href={APP_ROUTES.EMPLOYEE_ROLEPLAY_RESULTS(scenario.id)}
                     className="min-h-[44px] py-2.5 px-3 bg-white hover:bg-slate-50 border border-[#CBD5E1] rounded-xl text-[12px] sm:text-[12.5px] font-semibold text-[#1E293B] flex items-center justify-center gap-1.5 transition cursor-pointer"
                   >
                     <RotateCcw className="w-3.5 h-3.5 text-[#64748B]" />
                     <span>Xem lại</span>
-                  </button>
+                  </Link>
                 </div>
               ) : (
-                <button 
-                  type="button"
-                  onClick={() => alert(`Bắt đầu phòng luyện tập AI cho kịch bản: ${scenario.title}`)}
+                <Link 
+                  href={APP_ROUTES.EMPLOYEE_PRACTICE(scenario.id)}
                   className="w-full min-h-[44px] py-2.5 px-4 bg-[#C69214] hover:bg-[#B38210] active:scale-[0.99] text-white rounded-xl text-[12.5px] sm:text-[13px] font-bold flex items-center justify-center gap-2 transition shadow-xs cursor-pointer"
                 >
                   <Play className="w-3.5 h-3.5 fill-current" />
                   <span>Bắt đầu luyện tập</span>
-                </button>
+                </Link>
               )}
             </div>
           </div>

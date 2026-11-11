@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, UserPlus, Filter, Award, Mail, Phone, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { Search, UserPlus, Filter, Award, Mail, Phone, ChevronRight, UserCheck, Users } from "lucide-react";
 import { ClientHeader } from "@/components/layout/client/ClientHeader";
+import { APP_ROUTES } from "@/constants/routes";
 
 interface StaffMember {
   id: string;
@@ -44,14 +46,23 @@ export function ClientEmployeesPage() {
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={() => alert("Mở form thêm nhân sự mới")}
-          className="min-h-[44px] px-4 py-2.5 bg-[#C69214] hover:bg-[#B38210] active:scale-[0.99] text-white font-bold rounded-xl text-[13px] flex items-center gap-2 shadow-xs transition self-start sm:self-auto cursor-pointer"
-        >
-          <UserPlus className="w-4 h-4" />
-          <span>+ Thêm nhân sự</span>
-        </button>
+        <div className="flex items-center gap-2.5">
+          <Link
+            href={APP_ROUTES.CLIENT_EMPLOYEES_APPROVALS}
+            className="min-h-[44px] px-3.5 py-2.5 bg-amber-50 hover:bg-amber-100 text-[#8C6005] border border-amber-200 font-bold rounded-xl text-[13px] flex items-center gap-2 transition cursor-pointer"
+          >
+            <UserCheck className="w-4 h-4 text-[#C69214]" />
+            <span>Phê duyệt mới (3)</span>
+          </Link>
+          <button
+            type="button"
+            onClick={() => alert("Mở form thêm nhân sự mới")}
+            className="min-h-[44px] px-4 py-2.5 bg-[#C69214] hover:bg-[#B38210] active:scale-[0.99] text-white font-bold rounded-xl text-[13px] flex items-center gap-2 shadow-xs transition cursor-pointer"
+          >
+            <UserPlus className="w-4 h-4" />
+            <span>+ Thêm nhân sự</span>
+          </button>
+        </div>
       </div>
 
       {/* Filter and Search */}
@@ -118,13 +129,13 @@ export function ClientEmployeesPage() {
                     </span>
                   </td>
                   <td className="py-3.5 px-4 text-right">
-                    <button
-                      type="button"
-                      onClick={() => alert(`Xem chi tiết hồ sơ nhân sự: ${staff.name}`)}
-                      className="p-1.5 text-slate-400 hover:text-slate-800 rounded-lg hover:bg-slate-100 transition inline-flex items-center cursor-pointer"
+                    <Link
+                      href={APP_ROUTES.CLIENT_EMPLOYEE_DETAIL(staff.id)}
+                      className="p-1.5 text-slate-400 hover:text-[#C69214] rounded-lg hover:bg-amber-50 transition inline-flex items-center cursor-pointer"
+                      title="Xem hồ sơ năng lực & gửi nhận xét"
                     >
                       <ChevronRight className="w-4 h-4" />
-                    </button>
+                    </Link>
                   </td>
                 </tr>
               ))}
