@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "Rolly Academy - Hệ thống Đào tạo & Đánh giá F&B bằng AI",
   description: "Nền tảng đào tạo nhập vai thời gian thực bằng AI Voice Persona tiêu chuẩn 5 sao quốc tế",
   icons: {
-    icon: [
+    icon: [ 
       { url: "/icon.svg", type: "image/svg+xml" }
     ],
     shortcut: "/icon.svg",

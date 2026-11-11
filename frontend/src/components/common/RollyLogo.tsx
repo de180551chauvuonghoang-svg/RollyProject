@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface RollyLogoProps {
@@ -10,7 +11,10 @@ interface RollyLogoProps {
   size?: "sm" | "md" | "lg" | "xl";
   className?: string;
   href?: string;
+  title?: string;
+  suffix?: string;
   subtitle?: string;
+  verified?: boolean;
 }
 
 export function RollyLogo({
@@ -19,7 +23,10 @@ export function RollyLogo({
   size = "md",
   className,
   href,
+  title = "Rolly",
+  suffix = "Academy",
   subtitle,
+  verified = false,
 }: RollyLogoProps) {
   // Dimension mappings
   const iconSizes = {
@@ -100,16 +107,21 @@ export function RollyLogo({
             textColor
           )}
         >
-          Rolly
+          {title}
         </span>
-        <span
-          className={cn(
-            "font-serif font-light tracking-wide text-xs sm:text-sm",
-            subColor
-          )}
-        >
-          Academy
-        </span>
+        {suffix && (
+          <span
+            className={cn(
+              "font-serif font-light tracking-wide text-xs sm:text-sm",
+              subColor
+            )}
+          >
+            {suffix}
+          </span>
+        )}
+        {verified && (
+          <ShieldCheck className="w-4 h-4 text-[#C69214] shrink-0 ml-0.5" />
+        )}
       </div>
       {subtitle && (
         <span className={cn("text-[9.5px] font-bold tracking-[0.18em] uppercase mt-0.5 truncate", subColor)}>

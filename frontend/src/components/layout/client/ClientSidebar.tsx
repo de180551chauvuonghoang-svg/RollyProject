@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { APP_ROUTES } from "@/constants/routes";
+import { RollyLogo } from "@/components/common/RollyLogo";
 
 interface NavItem {
   label: string;
@@ -71,22 +72,16 @@ export function ClientSidebar({ isOpen, onClose }: ClientSidebarProps) {
       >
         {/* Top & Middle Sections */}
         <div className="space-y-4">
-          {/* Brand Header: Star Logo + Rolly For Client + Verified Badge */}
-          <div className="flex items-center justify-between px-1">
-            <Link 
-              href={APP_ROUTES.CLIENT_DASHBOARD}
-              className="flex items-center gap-2.5 group cursor-pointer"
-            >
-              <div className="w-8 h-8 rounded-full border border-slate-300 flex items-center justify-center text-[#C69214] bg-[#FEFCF7] shadow-xs">
-                <Sparkles className="w-4 h-4 fill-[#C69214]" />
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-serif text-lg font-bold text-[#0F172A] tracking-tight">
-                  Rolly For Client
-                </span>
-                <ShieldCheck className="w-4 h-4 text-[#C69214]" />
-              </div>
-            </Link>
+          {/* Header Row: Brand Logo (Unified with Employee Portal format) + Mobile Close Button */}
+          <div className="flex items-center justify-between">
+            <RollyLogo 
+              href={APP_ROUTES.CLIENT_DASHBOARD} 
+              size="md" 
+              title="Rolly"
+              suffix="For Client"
+              subtitle="Client Portal" 
+              verified={true}
+            />
 
             {/* Mobile close button */}
             <button
