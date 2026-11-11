@@ -1,264 +1,399 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { 
   Users, 
-  FileText, 
-  Bot, 
-  TrendingUp, 
-  AlertCircle, 
-  CheckCircle2, 
-  ArrowUpRight,
-  Shield,
-  Download,
-  Filter,
-  BarChart3
+  ShieldCheck, 
+  Hourglass, 
+  Calendar, 
+  Cpu, 
+  AlertTriangle, 
+  Zap, 
+  Search, 
+  SlidersHorizontal, 
+  Video, 
+  Database, 
+  Mic, 
+  FileText,
+  ChevronRight,
+  TrendingUp
 } from "lucide-react";
 import { ClientHeader } from "@/components/layout/client/ClientHeader";
 import { APP_ROUTES } from "@/constants/routes";
 
-export function ClientDashboardPage() {
-  return (
-    <div className="space-y-4 sm:space-y-6">
-      <ClientHeader breadcrumb="Tổng quan chi nhánh" />
+export default function ClientDashboardPage() {
+  const [searchTerm, setSearchTerm] = useState("");
 
-      {/* 1. Header & Quick Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
-        <div>
-          <h1 className="font-serif text-xl sm:text-2xl lg:text-[28px] font-bold text-[#0F172A] tracking-tight mb-1">
-            Bảng điều hành Chi nhánh (Client Portal)
-          </h1>
-          <p className="text-[13px] sm:text-[13.5px] text-[#64748B] leading-relaxed">
-            Giám sát chất lượng dịch vụ, tỷ lệ tuân thủ tiêu chuẩn SOP và tiến độ rèn luyện AI của toàn bộ đội ngũ nhân sự.
+  const logRows = [
+    {
+      id: "1",
+      initials: "LT",
+      initialsBg: "bg-[#EFE8D8] text-[#8C6005]",
+      name: "Lê Bảo Trâm",
+      role: "Junior Sommelier • Bàn VIP",
+      scenarioCode: "RP-04",
+      scenarioTitle: "Xử lý Vang chua & Đổi chai",
+      score: 85,
+      scoreColor: "text-[#0F172A]",
+      resultBadge: "Đạt chuẩn",
+      resultBadgeStyle: "bg-slate-100 text-slate-700 border border-slate-200",
+      managerComment: '"Thao tác ngửi nút bần và xin lỗi khách rất đúng chuẩn."',
+      link: APP_ROUTES.CLIENT_EMPLOYEE_DETAIL("1")
+    },
+    {
+      id: "2",
+      initials: "NQ",
+      initialsBg: "bg-[#C69214] text-white",
+      name: "Nguyễn Minh Quân",
+      role: "Head Butler • Khu Saloon",
+      scenarioCode: "RP-01",
+      scenarioTitle: "Đón tiếp VVIP & Nhận diện danh xưng",
+      score: 92,
+      scoreColor: "text-[#0F172A]",
+      resultBadge: "Xuất sắc",
+      resultBadgeStyle: "bg-[#C69214] text-white font-bold",
+      managerComment: '"Tác phong chuẩn mực, ghi nhớ chuẩn xác tên Host."',
+      link: APP_ROUTES.CLIENT_EMPLOYEE_DETAIL("2")
+    },
+    {
+      id: "3",
+      initials: "YN",
+      initialsBg: "bg-[#FFE4E6] text-[#E11D48]",
+      name: "Hoàng Yến Nhi",
+      role: "Commis de Rang • Mới tuyển dụng",
+      scenarioCode: "RP-02",
+      scenarioTitle: "Truy vấn Dị ứng Thực khách & Ghi phiếu",
+      score: 68,
+      scoreColor: "text-[#E11D48]",
+      resultBadge: "Cần luyện lại",
+      resultBadgeStyle: "bg-rose-50 text-rose-700 border border-rose-200 font-bold",
+      managerComment: '"Chưa đọc đúng thành phần đậu phộng trong sốt kem."',
+      link: APP_ROUTES.CLIENT_EMPLOYEE_DETAIL("3")
+    }
+  ];
+
+  return (
+    <div className="space-y-6">
+      <ClientHeader breadcrumb="Tổng quan" />
+
+      {/* Hero Section */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="space-y-1.5">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#C69214]" />
+            <h1 className="font-serif text-2xl sm:text-3xl lg:text-[32px] font-bold text-[#0F172A] tracking-tight">
+              Dashboard Quản Trị
+            </h1>
+          </div>
+          <p className="text-xs sm:text-sm text-[#64748B] max-w-3xl leading-relaxed">
+            Theo dõi sát sao hiệu chuẩn kỹ năng dịch vụ bàn, tỷ lệ lỗi xử lý rượu vang và tiến trình chuyển đổi năng lực phục vụ chuẩn của đội ngũ nhân sự.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
-          <button
-            type="button"
-            onClick={() => alert("Xuất báo cáo định dạng PDF/Excel")}
-            className="min-h-[42px] px-3.5 py-2 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl text-[12.5px] font-semibold text-slate-700 flex items-center gap-2 shadow-2xs transition cursor-pointer"
-          >
-            <Download className="w-4 h-4 text-slate-500" />
-            <span>Xuất báo cáo</span>
-          </button>
+        {/* Date Filter Button */}
+        <button
+          type="button"
+          onClick={() => alert("Chọn chu kỳ báo cáo")}
+          className="min-h-[42px] px-4 py-2 bg-white border border-[#E2E8F0] hover:bg-slate-50 text-slate-800 text-xs sm:text-sm font-semibold rounded-xl flex items-center gap-2 shadow-2xs transition self-start md:self-auto cursor-pointer"
+        >
+          <Calendar className="w-4 h-4 text-slate-500" />
+          <span>Tháng 10/2024</span>
+        </button>
+      </div>
+
+      {/* Top 3 Metric Cards (Figma SCR-CLI-04) */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+        {/* Card 1: Tổng nhân sự hoạt động */}
+        <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs flex flex-col justify-between">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
+              TỔNG NHÂN SỰ HOẠT ĐỘNG
+            </span>
+            <div className="w-9 h-9 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center">
+              <Users className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="mt-4">
+            <div className="font-serif text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight">
+              148 <span className="text-sm font-sans font-normal text-slate-500">nhân viên</span>
+            </div>
+            <div className="text-xs text-emerald-700 font-semibold mt-2 flex items-center gap-1">
+              <TrendingUp className="w-3.5 h-3.5" />
+              <span>+12.0% so với tháng trước</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 2: Tỷ lệ vượt chuẩn SOP */}
+        <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs flex flex-col justify-between">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
+              TỶ LỆ VƯỢT CHUẨN SOP
+            </span>
+            <div className="w-9 h-9 rounded-xl bg-[#FEF9C3] text-[#A16207] flex items-center justify-center">
+              <ShieldCheck className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="mt-4">
+            <div className="font-serif text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight">
+              84.6%
+            </div>
+            <div className="text-xs text-emerald-700 font-semibold mt-2 flex items-center gap-1">
+              <TrendingUp className="w-3.5 h-3.5" />
+              <span>+5.2% sau Role-play AI</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 3: Phiên thực hành */}
+        <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs flex flex-col justify-between">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
+              PHIÊN THỰC HÀNH
+            </span>
+            <div className="w-9 h-9 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center">
+              <Hourglass className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="mt-4">
+            <div className="font-serif text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight">
+              1,420 <span className="text-sm font-sans font-normal text-slate-500">phiên</span>
+            </div>
+            <div className="text-xs text-slate-500 mt-2">
+              Ghi nhận qua Voice AI Stream
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Middle 2-Column Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
+        {/* Left Card: Tình trạng Hạ tầng & Hạn mức */}
+        <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-4">
+          <div className="flex items-center gap-2">
+            <Cpu className="w-5 h-5 text-[#8C6005]" />
+            <h2 className="font-serif text-lg font-bold text-[#0F172A]">
+              Tình trạng Hạ tầng &amp; Hạn mức
+            </h2>
+          </div>
+          <p className="text-xs text-[#64748B] leading-relaxed">
+            Hạn ngạch tiêu thụ tính toán LLM, hình ảnh và tổng hợp giọng nói phục vụ sát hạch giả lập khách VIP.
+          </p>
+
+          <div className="space-y-4 pt-1">
+            {/* Metric 1 */}
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-semibold text-slate-800 flex items-center gap-1.5">
+                  <Video className="w-3.5 h-3.5 text-slate-600" /> D-ID Real-Time Video Stream
+                </span>
+                <span className="font-bold text-[#8C6005]">3,690 / 5,000 phút (73.8%)</span>
+              </div>
+              <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div className="bg-[#1E293B] h-full rounded-full" style={{ width: "73.8%" }} />
+              </div>
+            </div>
+
+            {/* Metric 2 */}
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-semibold text-slate-800 flex items-center gap-1.5">
+                  <Database className="w-3.5 h-3.5 text-slate-600" /> Qdrant Vector RAG
+                </span>
+                <span className="font-bold text-[#8C6005]">428.5K / 600K vectors (70.0%)</span>
+              </div>
+              <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div className="bg-[#C69214] h-full rounded-full" style={{ width: "70.0%" }} />
+              </div>
+            </div>
+
+            {/* Metric 3 */}
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-semibold text-slate-800 flex items-center gap-1.5">
+                  <Mic className="w-3.5 h-3.5 text-slate-600" /> Whisper AI Voice Transcription
+                </span>
+                <span className="font-bold text-[#8C6005]">1,240 / 2,000 giờ (62.0%)</span>
+              </div>
+              <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div className="bg-[#C69214] h-full rounded-full" style={{ width: "62.0%" }} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Card: Top 5 các Scenarios */}
+        <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-4 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <AlertTriangle className="w-5 h-5 text-amber-600" />
+              <h2 className="font-serif text-lg font-bold text-[#0F172A]">
+                Top 5 các Scenarios
+              </h2>
+            </div>
+
+            <div className="space-y-2.5">
+              {[
+                "1. Xử lý nhiệt độ & Decanting vang lâu năm",
+                "2. Ghi nhớ thành phần dị ứng trong Menu Mùa Thu",
+                "3. Xử lý tình huống thực khách phàn nàn chờ món >25 phút",
+                "4. Nghi thức rót rượu xoay cổ chai, tránh chạm vành ly pha lê",
+                "5. Nghệ thuật gợi mở Upsell rượu tráng miệng (Sauternes / Tokaji)",
+              ].map((text, idx) => (
+                <div key={idx} className="space-y-1">
+                  <div className="text-xs text-slate-800 font-medium truncate">{text}</div>
+                  <div className="w-full bg-slate-100 h-1 rounded-full overflow-hidden">
+                    <div 
+                      className="bg-[#C69214] h-full rounded-full" 
+                      style={{ width: `${85 - idx * 12}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <Link
-            href={APP_ROUTES.CLIENT_SOP}
-            className="min-h-[42px] px-4 py-2 bg-[#C69214] hover:bg-[#B38210] active:scale-[0.99] text-white font-bold rounded-xl text-[12.5px] flex items-center gap-1.5 shadow-sm transition"
+            href={APP_ROUTES.CLIENT_SCENARIOS}
+            className="w-full min-h-[42px] mt-2 py-2.5 px-4 bg-[#C69214] hover:bg-[#B07E0F] text-white text-xs sm:text-sm font-bold rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition cursor-pointer"
           >
-            <span>+ Tải lên SOP mới</span>
+            <Zap className="w-4 h-4 fill-white" />
+            <span>Tạo Kịch Bản Huấn Luyện</span>
           </Link>
         </div>
       </div>
 
-      {/* 2. 4 Key Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#ECE5D8] shadow-2xs flex items-center justify-between">
-          <div>
-            <span className="text-[10px] sm:text-[10.5px] font-bold tracking-wider uppercase text-slate-400">
-              NHÂN SỰ ĐANG ĐÀO TẠO
-            </span>
-            <div className="text-2xl sm:text-[28px] font-serif font-bold text-[#0F172A] mt-1">
-              24 <span className="text-sm font-sans font-medium text-slate-400">thành viên</span>
-            </div>
-            <div className="flex items-center gap-1 text-[11px] font-semibold text-emerald-600 mt-1">
-              <TrendingUp className="w-3.5 h-3.5" />
-              <span>100% tài khoản kích hoạt</span>
-            </div>
+      {/* Bottom Section: Nhật Ký Thực Hành & Thẩm Định Thời Gian Thực */}
+      <div className="bg-white border border-[#ECE5D8] rounded-2xl shadow-2xs overflow-hidden">
+        {/* Table Header Filter Bar */}
+        <div className="p-5 sm:p-6 border-b border-[#ECE5D8] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <FileText className="w-5 h-5 text-[#8C6005]" />
+            <h2 className="font-serif text-lg font-bold text-[#0F172A]">
+              Nhật Ký Thực Hành &amp; Thẩm Định Thời Gian Thực
+            </h2>
           </div>
-          <div className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 shrink-0">
-            <Users className="w-5 h-5" />
-          </div>
-        </div>
 
-        <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#ECE5D8] shadow-2xs flex items-center justify-between">
-          <div>
-            <span className="text-[10px] sm:text-[10.5px] font-bold tracking-wider uppercase text-slate-400">
-              TỶ LỆ TUÂN THỦ SOP
-            </span>
-            <div className="text-2xl sm:text-[28px] font-serif font-bold text-[#0F172A] mt-1">
-              94.6%
+          <div className="flex items-center gap-2.5">
+            <div className="relative flex-1 sm:w-64">
+              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Lọc theo tên hoặc mã kịch bản"
+                className="w-full min-h-[38px] pl-9 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#C69214]"
+              />
             </div>
-            <div className="flex items-center gap-1 text-[11px] font-semibold text-emerald-600 mt-1">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>+3.8% so với tháng trước</span>
-            </div>
-          </div>
-          <div className="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
-            <Shield className="w-5 h-5" />
-          </div>
-        </div>
-
-        <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#ECE5D8] shadow-2xs flex items-center justify-between">
-          <div>
-            <span className="text-[10px] sm:text-[10.5px] font-bold tracking-wider uppercase text-slate-400">
-              TỔNG GIỜ LUYỆN TẬP AI
-            </span>
-            <div className="text-2xl sm:text-[28px] font-serif font-bold text-[#0F172A] mt-1">
-              186.4 <span className="text-sm font-sans font-medium text-slate-400">giờ</span>
-            </div>
-            <div className="text-[11px] text-slate-500 mt-1">
-              Trung bình 7.7h / nhân viên
-            </div>
-          </div>
-          <div className="w-11 h-11 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#C69214] shrink-0">
-            <Bot className="w-5 h-5" />
-          </div>
-        </div>
-
-        <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#ECE5D8] shadow-2xs flex items-center justify-between">
-          <div>
-            <span className="text-[10px] sm:text-[10.5px] font-bold tracking-wider uppercase text-slate-400">
-              KHO SOP HIỆN HÀNH
-            </span>
-            <div className="text-2xl sm:text-[28px] font-serif font-bold text-[#0F172A] mt-1">
-              18 <span className="text-sm font-sans font-medium text-slate-400">quy chuẩn</span>
-            </div>
-            <div className="text-[11px] text-slate-500 mt-1">
-              4 quy trình Fine Dining mới
-            </div>
-          </div>
-          <div className="w-11 h-11 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-600 shrink-0">
-            <FileText className="w-5 h-5" />
-          </div>
-        </div>
-      </div>
-
-      {/* 3. Main Dashboard Panels */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-        {/* Left 2 Cols: Leaderboard & Nhân sự xuất sắc */}
-        <div className="lg:col-span-2 bg-white rounded-2xl p-4 sm:p-6 border border-[#ECE5D8] shadow-xs">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h3 className="font-serif font-bold text-lg text-[#0F172A]">
-                Bảng Xếp Hạng Năng Lực Nhân Sự
-              </h3>
-              <p className="text-[12.5px] text-slate-500">
-                Top nhân sự hoàn thành xuất sắc các bài kiểm tra thực cảnh AI tuần này.
-              </p>
-            </div>
-            <Link
-              href={APP_ROUTES.CLIENT_EMPLOYEES}
-              className="text-[12.5px] font-semibold text-[#C69214] hover:underline flex items-center gap-1"
+            <button
+              type="button"
+              className="min-h-[38px] px-3 py-1.5 bg-white border border-slate-200 hover:bg-slate-50 rounded-xl text-xs font-semibold text-slate-700 flex items-center gap-1.5 transition cursor-pointer"
             >
-              <span>Xem tất cả 24 nhân sự</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse text-[13px]">
-              <thead>
-                <tr className="border-b border-slate-100 text-[10.5px] font-bold tracking-wider uppercase text-slate-400">
-                  <th className="py-2.5 px-3">Học viên</th>
-                  <th className="py-2.5 px-3">Vị trí</th>
-                  <th className="py-2.5 px-3 text-center">Tiến độ</th>
-                  <th className="py-2.5 px-3 text-center">Điểm TB</th>
-                  <th className="py-2.5 px-3 text-right">Trạng thái</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                <tr className="hover:bg-slate-50 transition">
-                  <td className="py-3 px-3 font-semibold text-slate-900 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-amber-100 text-[#8C6005] font-bold text-[11px] flex items-center justify-center">1</span>
-                    <span>Nguyễn Hoàng Long</span>
-                  </td>
-                  <td className="py-3 px-3 text-slate-600">Head Sommelier</td>
-                  <td className="py-3 px-3 text-center font-medium">78%</td>
-                  <td className="py-3 px-3 text-center font-bold text-slate-900">84.2/100</td>
-                  <td className="py-3 px-3 text-right">
-                    <span className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                      Xuất sắc
-                    </span>
-                  </td>
-                </tr>
-
-                <tr className="hover:bg-slate-50 transition">
-                  <td className="py-3 px-3 font-semibold text-slate-900 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-700 font-bold text-[11px] flex items-center justify-center">2</span>
-                    <span>Trần Mai Anh</span>
-                  </td>
-                  <td className="py-3 px-3 text-slate-600">Captain (Trưởng ca)</td>
-                  <td className="py-3 px-3 text-center font-medium">85%</td>
-                  <td className="py-3 px-3 text-center font-bold text-slate-900">82.0/100</td>
-                  <td className="py-3 px-3 text-right">
-                    <span className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                      Đạt chuẩn
-                    </span>
-                  </td>
-                </tr>
-
-                <tr className="hover:bg-slate-50 transition">
-                  <td className="py-3 px-3 font-semibold text-slate-900 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-700 font-bold text-[11px] flex items-center justify-center">3</span>
-                    <span>Lê Quốc Bảo</span>
-                  </td>
-                  <td className="py-3 px-3 text-slate-600">Bartender Specialist</td>
-                  <td className="py-3 px-3 text-center font-medium">62%</td>
-                  <td className="py-3 px-3 text-center font-bold text-slate-900">76.5/100</td>
-                  <td className="py-3 px-3 text-right">
-                    <span className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200">
-                      Đang luyện tập
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+              <SlidersHorizontal className="w-3.5 h-3.5 text-slate-500" />
+              <span>Bộ lọc</span>
+            </button>
           </div>
         </div>
 
-        {/* Right Col: Cảnh báo sự cố SOP & Quick Actions */}
-        <div className="space-y-4">
-          <div className="bg-[#FFFDF7] rounded-2xl p-4 sm:p-5 border border-[#F3E3B8] shadow-xs">
-            <div className="flex items-center gap-2 text-[#C69214] font-bold text-[14px] mb-2">
-              <AlertCircle className="w-4 h-4" />
-              <span>Điểm cần củng cố tuần này</span>
-            </div>
-            <p className="text-[12.5px] text-slate-600 leading-relaxed mb-3">
-              Kịch bản <strong>SOP-FNB-07: Xử lý dị ứng nấm</strong> ghi nhận tỷ lệ phản xạ trễ &gt; 3 giây ở 4 học viên mới. Nên tổ chức phiên role-play nhóm để ôn luyện.
-            </p>
-            <Link
-              href={APP_ROUTES.CLIENT_SCENARIOS}
-              className="inline-flex items-center gap-1.5 text-[12.5px] font-bold text-[#8C6005] hover:underline"
-            >
-              <span>Xem cấu hình kịch bản này</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
+        {/* Table Data */}
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr className="bg-slate-50/70 border-b border-slate-200 text-[10.5px] font-bold tracking-wider uppercase text-slate-400">
+                <th className="py-3 px-5">NHÂN SỰ ĐÀO TẠO</th>
+                <th className="py-3 px-5">KỊCH BẢN ROLE-PLAY</th>
+                <th className="py-3 px-5 text-center">ĐIỂM SỐ</th>
+                <th className="py-3 px-5 text-center">KẾT QUẢ</th>
+                <th className="py-3 px-5">NHẬN XÉT QUẢN LÍ</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {logRows.map((row) => (
+                <tr key={row.id} className="hover:bg-[#FAF8F5] transition">
+                  {/* Nhân sự */}
+                  <td className="py-3.5 px-5">
+                    <Link href={row.link} className="flex items-center gap-3 group">
+                      <div className={`w-8 h-8 rounded-full ${row.initialsBg} font-bold text-xs flex items-center justify-center shrink-0`}>
+                        {row.initials}
+                      </div>
+                      <div>
+                        <div className="font-bold text-[#0F172A] group-hover:text-[#C69214] transition">
+                          {row.name}
+                        </div>
+                        <div className="text-[11px] text-slate-500 font-normal">
+                          {row.role}
+                        </div>
+                      </div>
+                    </Link>
+                  </td>
+
+                  {/* Kịch bản */}
+                  <td className="py-3.5 px-5">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-[10.5px] font-bold text-[#8C6005] bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                        {row.scenarioCode}
+                      </span>
+                      <span className="font-semibold text-slate-800 line-clamp-1">
+                        {row.scenarioTitle}
+                      </span>
+                    </div>
+                  </td>
+
+                  {/* Điểm số */}
+                  <td className="py-3.5 px-5 text-center">
+                    <span className={`font-serif text-lg font-bold ${row.scoreColor}`}>
+                      {row.score}
+                    </span>
+                    <span className="text-[11px] text-slate-400">/100</span>
+                  </td>
+
+                  {/* Kết quả */}
+                  <td className="py-3.5 px-5 text-center">
+                    <span className={`inline-block px-3 py-0.5 rounded-full text-[11px] ${row.resultBadgeStyle}`}>
+                      {row.resultBadge}
+                    </span>
+                  </td>
+
+                  {/* Nhận xét Quản lý */}
+                  <td className="py-3.5 px-5 text-xs text-slate-600 italic">
+                    {row.managerComment}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Table Footer */}
+        <div className="p-4 sm:p-5 border-t border-[#ECE5D8] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+          <div>
+            Hiển thị <strong>3</strong> trên tổng số <strong>1,420</strong> lượt sát hạch ghi nhận tháng 10/2024
           </div>
 
-          <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-2xs">
-            <h4 className="font-bold text-[14px] text-slate-900 mb-2">
-              Lối tắt tác vụ Quản lý
-            </h4>
-            <div className="space-y-2">
-              <Link
-                href={APP_ROUTES.CLIENT_EMPLOYEES}
-                className="w-full p-2.5 rounded-xl border border-slate-200 hover:border-[#C69214] hover:bg-[#FAF8F5] transition flex items-center justify-between text-[13px] text-slate-700"
-              >
-                <span>Thêm nhân sự mới vào hệ thống</span>
-                <Users className="w-4 h-4 text-slate-400" />
-              </Link>
-              <Link
-                href={APP_ROUTES.CLIENT_SOP}
-                className="w-full p-2.5 rounded-xl border border-slate-200 hover:border-[#C69214] hover:bg-[#FAF8F5] transition flex items-center justify-between text-[13px] text-slate-700"
-              >
-                <span>Cập nhật Menu Tasting &amp; Wine List</span>
-                <FileText className="w-4 h-4 text-slate-400" />
-              </Link>
-              <Link
-                href={APP_ROUTES.CLIENT_REPORTS}
-                className="w-full p-2.5 rounded-xl border border-slate-200 hover:border-[#C69214] hover:bg-[#FAF8F5] transition flex items-center justify-between text-[13px] text-slate-700"
-              >
-                <span>Phân tích dữ liệu giọng nói AI Voice</span>
-                <BarChart3 className="w-4 h-4 text-slate-400" />
-              </Link>
-            </div>
+          <div className="flex items-center gap-1">
+            <button className="px-3 py-1 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 disabled:opacity-40">
+              Trước
+            </button>
+            <button className="px-3 py-1 rounded-lg bg-[#C69214] text-white font-bold">
+              1
+            </button>
+            <button className="px-3 py-1 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600">
+              2
+            </button>
+            <button className="px-3 py-1 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600">
+              3
+            </button>
+            <span className="px-1 text-slate-400">...</span>
+            <button className="px-3 py-1 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600">
+              47
+            </button>
+            <button className="px-3 py-1 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600">
+              Sau
+            </button>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-export default ClientDashboardPage;

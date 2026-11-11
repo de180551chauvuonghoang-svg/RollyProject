@@ -1,269 +1,320 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { 
   ArrowLeft, 
-  Bot, 
   Edit3, 
-  Play, 
-  ShieldCheck, 
-  Users, 
-  Award, 
   Clock, 
-  BookOpen, 
-  FileText, 
-  AlertCircle,
-  Sparkles,
-  ChevronRight,
-  TrendingUp,
-  Sliders
+  MessageSquare, 
+  Check, 
+  X, 
+  ChevronDown, 
+  Sparkles, 
+  SlidersHorizontal,
+  FileText
 } from "lucide-react";
 import { ClientHeader } from "@/components/layout/client/ClientHeader";
 import { APP_ROUTES } from "@/constants/routes";
 
 export default function ScenarioDetailPage() {
   const params = useParams();
+  const router = useRouter();
   const scenarioId = params?.id || "1";
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto">
-      <ClientHeader breadcrumb={`Kịch bản Role-play AI / SCN-FNB-01`} />
+    <div className="space-y-6">
+      <ClientHeader breadcrumb="Kịch bản &amp; Prompt AI / Bàn VIP Dị ứng nấm &amp; Đổi món" />
 
-      {/* Navigation & Header Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <Link 
-          href={APP_ROUTES.CLIENT_SCENARIOS}
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#64748B] hover:text-[#C69214] transition"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Quay lại danh mục kịch bản</span>
-        </Link>
-
-        <div className="flex items-center gap-2.5">
-          <Link
-            href={APP_ROUTES.CLIENT_SCENARIO_EDIT(String(scenarioId))}
-            className="min-h-[42px] px-4 py-2 bg-white border border-[#CBD5E1] hover:bg-slate-50 text-[#1E293B] text-xs sm:text-sm font-semibold rounded-xl flex items-center gap-2 transition cursor-pointer"
-          >
-            <Edit3 className="w-4 h-4 text-[#C69214]" />
-            <span>Chỉnh sửa kịch bản</span>
-          </Link>
-
-          <Link
-            href={APP_ROUTES.EMPLOYEE_PRACTICE("2")}
-            className="min-h-[42px] px-4 py-2 bg-[#C69214] hover:bg-[#B07E0F] text-white text-xs sm:text-sm font-bold rounded-xl flex items-center gap-2 shadow-xs transition cursor-pointer"
-          >
-            <Bot className="w-4 h-4" />
-            <span>Luyện tập thử với AI</span>
-          </Link>
+      {/* Title with yellow vertical accent bar (Figma SCR-CLI-07) */}
+      <div className="space-y-1.5">
+        <div className="flex items-center gap-3">
+          <span className="w-1.5 h-7 rounded-full bg-[#C69214]" />
+          <h1 className="font-serif text-2xl sm:text-3xl lg:text-[32px] font-bold text-[#0F172A] tracking-tight">
+            Bàn VIP Dị ứng nấm và Đổi món
+          </h1>
         </div>
-      </div>
-
-      {/* Hero Banner */}
-      <div className="bg-white border border-[#ECE5D8] rounded-2xl p-6 sm:p-7 shadow-xs space-y-4">
-        <div className="flex flex-wrap items-center gap-2.5">
-          <span className="font-mono text-xs font-bold text-[#8C6005] bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200">
-            SCN-FNB-01
-          </span>
-          <span className="px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold">
-            Thử thách cao
-          </span>
-          <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold flex items-center gap-1">
-            <ShieldCheck className="w-3.5 h-3.5" /> Đang hoạt động
-          </span>
-          <span className="text-xs text-[#64748B]">Bộ phận: F&B / Sommelier</span>
-        </div>
-
-        <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#0F172A] leading-tight">
-          Khách VVIP Phàn nàn Chai Vang có mùi ẩm mốc (TCA Cork Taint)
-        </h1>
-
-        <p className="text-xs sm:text-sm text-[#475569] max-w-4xl leading-relaxed">
-          Tình huống mô phỏng đối thoại thực tế giữa nhân viên Sommelier và thực khách Jean-Paul khi chai vang Bordeaux Grand Cru niên vụ 2010 gặp sự cố lỗi nút bần. Thử thách khả năng kiềm chế cảm xúc, xoa dịu khách và kích hoạt quy trình đổi vang tức thì.
+        <p className="text-xs sm:text-sm text-[#64748B] pl-4 leading-relaxed max-w-4xl">
+          Thiết lập nhân vật thực khách ảo AI, liên kết vector SOP và bộ trọng số đánh giá đa chiều cho chuẩn dịch vụ nhà hàng fine dining.
         </p>
       </div>
 
-      {/* Main Grid Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column: Details & Rubrics */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* Persona Card */}
-          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-6 shadow-xs space-y-5">
-            <div className="flex items-center gap-2 text-xs font-bold text-[#C69214] uppercase tracking-wider">
-              <Bot className="w-4 h-4" />
-              <span>Hồ sơ Persona Khách Hàng Giả Lập AI</span>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-xl bg-[#FEFCF7] border border-[#ECE5D8]">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0F172A] to-[#1E293B] text-[#E2B755] flex items-center justify-center font-serif text-xl font-bold shrink-0 shadow-xs">
-                JP
-              </div>
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <h3 className="font-serif font-bold text-base text-[#0F172A]">Jean-Paul (62 tuổi)</h3>
-                  <span className="text-xs text-slate-500 font-medium">Paris, Pháp</span>
-                </div>
-                <div className="text-xs text-[#8C6005] font-semibold">Chuyên gia ẩm thực &amp; Nhà phê bình Michelin độc lập</div>
-                <p className="text-xs text-[#64748B] leading-relaxed">
-                  Phong thái lịch thiệp nhưng cực kỳ nghiêm khắc về kỹ thuật phục vụ rượu vang. Có khứu giác nhạy bén, nhận biết lỗi nút bần TCA ngay từ ngụm đầu tiên.
-                </p>
-              </div>
-            </div>
-
-            {/* Persona Behavioral Attributes */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
-              <div className="p-3.5 rounded-xl border border-slate-200 space-y-1">
-                <div className="font-bold text-[#0F172A]">Tâm trạng khởi đầu (Initial State):</div>
-                <p className="text-[#64748B]">Bực bội, thất vọng vì bữa tối quan trọng bị gián đoạn, nghi ngờ chất lượng bảo quản hầm rượu.</p>
-              </div>
-              <div className="p-3.5 rounded-xl border border-slate-200 space-y-1">
-                <div className="font-bold text-[#0F172A]">Điều kiện làm dịu (Satisfied Trigger):</div>
-                <p className="text-[#64748B]">Sommelier thừa nhận lịch sự không tranh cãi, xin phép kiểm tra và đề xuất mở ngay chai mới cùng niên vụ.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* AI Scoring Rubric */}
-          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-6 shadow-xs space-y-5">
+      {/* 2-Column Layout (Figma SCR-CLI-07) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Left Column (Span 7) */}
+        <div className="lg:col-span-7 space-y-6">
+          {/* 1. Tên kịch bản */}
+          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-xs font-bold text-[#C69214] uppercase tracking-wider">
-                <Sliders className="w-4 h-4" />
-                <span>Trọng số 4 Tiêu Chí Đánh Giá AI</span>
-              </div>
-              <span className="text-xs text-slate-400 font-medium">Tổng 100%</span>
+              <span className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                1. TÊN KỊCH BẢN
+              </span>
+              <span className="font-mono text-xs font-bold text-[#8C6005] bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+                MÃ: RP-09
+              </span>
             </div>
+            <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-[#0F172A]">
+              Bàn VIP Dị ứng nấm &amp; Đổi món
+            </div>
+          </div>
 
-            <div className="space-y-3.5">
-              <div className="p-4 rounded-xl border border-slate-200 space-y-2">
-                <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-[#0F172A]">
-                  <span>1. Tuân thủ Quy trình SOP Thẩm định Rượu vang</span>
-                  <span className="text-[#C69214]">35%</span>
-                </div>
-                <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-                  <div className="bg-[#C69214] h-full rounded-full" style={{ width: "35%" }} />
-                </div>
-                <p className="text-xs text-[#64748B]">
-                  Kiểm tra xem Sommelier có đưa ra quy trình đối chiếu nhãn chai, kiểm tra nút bần và bảo quản đúng chuẩn không.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-xl border border-slate-200 space-y-2">
-                <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-[#0F172A]">
-                  <span>2. Ngữ điệu &amp; Tác phong Giao tiếp (Tone of Voice)</span>
-                  <span className="text-[#C69214]">25%</span>
-                </div>
-                <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-                  <div className="bg-[#C69214] h-full rounded-full" style={{ width: "25%" }} />
-                </div>
-                <p className="text-xs text-[#64748B]">
-                  Giọng nói điềm tĩnh, ấm áp, dùng kính ngữ, không dùng từ ngữ tranh cãi hay phủ nhận cảm nhận của khách.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-xl border border-slate-200 space-y-2">
-                <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-[#0F172A]">
-                  <span>3. Kỹ năng Xoa dịu &amp; Xử lý Khủng hoảng</span>
-                  <span className="text-[#C69214]">25%</span>
-                </div>
-                <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-                  <div className="bg-[#C69214] h-full rounded-full" style={{ width: "25%" }} />
-                </div>
-                <p className="text-xs text-[#64748B]">
-                  Chủ động đề xuất phương án thay thế nhanh gọn, linh hoạt tặng kèm ly tráng miệng hoặc lời xin lỗi chân thành.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-xl border border-slate-200 space-y-2">
-                <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-[#0F172A]">
-                  <span>4. Tính Chuyên nghiệp &amp; Tốc độ Phản xạ</span>
-                  <span className="text-[#C69214]">15%</span>
-                </div>
-                <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-                  <div className="bg-[#C69214] h-full rounded-full" style={{ width: "15%" }} />
-                </div>
-                <p className="text-xs text-[#64748B]">
-                  Giải quyết tình huống trong vòng 5 lượt thoại, không ngập ngừng kéo dài thời gian chờ của thực khách.
-                </p>
+          {/* 2. Mô tả, bối cảnh */}
+          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+            <div className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+              2. MÔ TẢ, BỐI CẢNH
+            </div>
+            <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-[13px] text-slate-700 leading-relaxed space-y-2">
+              <p>
+                Bối cảnh tiệc tối riêng tư tại Phòng Hoàng Gia của D'Honneur Salon 02. Thực khách VVIP là một nhà sưu tập lâu năm và có tiếng tăm rượu vang sang chảnh, vừa nếm thử chai Château Margaux 2015 và cho rằng rượu bị bảo quản quá ẩm hoặc tính 21°C thay vì 16–18°C chuẩn. Thực khách tỏ thái độ không hài lòng, nghi ngờ quy trình Cellar Master và yêu cầu Sommelier đổi ngay lập tức chai khác hoặc hoàn tiền toàn bộ thực đơn degustation. AI Persona phải duy trì thái độ kiên định, thử thách sự mềm mỏng, kiến thức định đặc và kỹ năng decanter lạnh của Sommelier.
+              </p>
+              <div className="text-right text-[11px] text-slate-400 font-mono pt-1">
+                * 715/1500 ký tự
               </div>
             </div>
           </div>
 
-          {/* Attached SOP reference */}
-          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-6 shadow-xs space-y-3">
-            <div className="text-xs font-bold text-[#64748B] uppercase tracking-wider">Tài liệu SOP Tham chiếu Liên kết</div>
-            <div className="p-4 rounded-xl bg-amber-50/50 border border-amber-200 flex items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <FileText className="w-5 h-5 text-[#C69214] shrink-0" />
+          {/* 3. Lựa chọn persona khách hàng */}
+          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+            <div className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+              3. LỰA CHỌN PERSONA KHÁCH HÀNG
+            </div>
+
+            {/* Selected Persona: Ngài Arthur Pendleton */}
+            <div className="p-4 rounded-xl border-2 border-[#C69214] bg-[#FFFDF9] flex items-center justify-between gap-3 shadow-2xs">
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 rounded-xl bg-slate-900 text-[#E2B755] flex items-center justify-center font-bold text-sm shrink-0">
+                  AP
+                </div>
                 <div>
-                  <div className="font-bold text-xs sm:text-sm text-[#0F172A]">
-                    SOP-FNB-04: Khai mở, Chiết vang Decanter &amp; Kiểm soát Nhiệt độ
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-sm text-[#0F172A]">Ngài Arthur Pendleton</span>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                      KHÓ TÍNH
+                    </span>
                   </div>
-                  <div className="text-xs text-[#8C6005]">Thời lượng học: 12 phút • Bắt buộc cho Sommelier</div>
+                  <div className="text-xs text-slate-500 font-medium mt-0.5">
+                    VVIP Connoisseur • Khách quen thân niên • Anh quốc
+                  </div>
                 </div>
               </div>
-              <Link
-                href={APP_ROUTES.EMPLOYEE_COURSE_DETAIL("1")}
-                className="px-3 py-1.5 bg-white border border-amber-200 hover:bg-amber-100 text-[#8C6005] text-xs font-semibold rounded-lg transition shrink-0"
-              >
-                Xem SOP
-              </Link>
+              <div className="w-5 h-5 rounded-full border-2 border-[#C69214] flex items-center justify-center">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#C69214]" />
+              </div>
+            </div>
+
+            {/* Other Personas */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div className="p-3.5 rounded-xl border border-slate-200 bg-white flex items-center gap-3 opacity-60">
+                <div className="w-4 h-4 rounded-full border border-slate-300" />
+                <div>
+                  <div className="font-semibold text-xs text-[#0F172A]">Doanh nhân</div>
+                  <div className="text-[11px] text-slate-400">Thiếu kiên nhẫn</div>
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-xl border border-slate-200 bg-white flex items-center gap-3 opacity-60">
+                <div className="w-4 h-4 rounded-full border border-slate-300" />
+                <div>
+                  <div className="font-semibold text-xs text-[#0F172A]">Cặp đôi kỷ niệm</div>
+                  <div className="text-[11px] text-slate-400">Cảm xúc, lãng mạn</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 4. Giới hạn thời lượng & lượt tương tác */}
+          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+            <div className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+              4. GIỚI HẠN THỜI LƯỢNG &amp; LƯỢT TƯƠNG TÁC
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-amber-50 text-[#C69214] flex items-center justify-center">
+                  <Clock className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[11px] text-slate-400 font-medium">Thời lượng</div>
+                  <div className="font-bold text-sm text-[#0F172A]">08:00 phút</div>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-amber-50 text-[#C69214] flex items-center justify-center">
+                  <MessageSquare className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[11px] text-slate-400 font-medium">Lượt thoại tối đa</div>
+                  <div className="font-bold text-sm text-[#0F172A]">10 lượt</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 5. Độ khó của scenario */}
+          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+            <div className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+              5. ĐỘ KHÓ CỦA SCENARIO
+            </div>
+            <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-[#0F172A] flex items-center justify-between">
+              <span>Hard (Chuyên nghiệp / Thử thách)</span>
+              <ChevronDown className="w-4 h-4 text-slate-400" />
             </div>
           </div>
         </div>
 
-        {/* Right Sidebar */}
-        <div className="space-y-6">
-          {/* Quick Stats */}
-          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 shadow-xs space-y-4">
-            <div className="text-xs font-bold text-[#64748B] uppercase tracking-wider">Thống kê hiệu quả kịch bản</div>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-[#64748B]">Số lượt thực hành:</span>
-                <span className="font-bold text-[#0F172A]">382 lượt</span>
-              </div>
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-[#64748B]">Điểm TB toàn chuỗi:</span>
-                <span className="font-bold text-[#C69214]">84.5 / 100</span>
-              </div>
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-[#64748B]">Tỷ lệ vượt qua:</span>
-                <span className="font-bold text-emerald-700">78%</span>
-              </div>
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-[#64748B]">Thời lượng TB:</span>
-                <span className="font-bold text-[#0F172A]">06 phút 15 giây</span>
-              </div>
+        {/* Right Column (Span 5) */}
+        <div className="lg:col-span-5 space-y-6">
+          {/* 6. Tài liệu SOP tham chiếu */}
+          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                6. TÀI LIỆU SOP THAM CHIẾU
+              </span>
+              <span className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
+                <Check className="w-3.5 h-3.5" /> 2 Tài liệu được chọn
+              </span>
             </div>
-          </div>
 
-          {/* Top Performers */}
-          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 shadow-xs space-y-3">
-            <div className="text-xs font-bold text-[#64748B] uppercase tracking-wider">Nhân viên đạt điểm cao nhất</div>
             <div className="space-y-2.5">
-              {[
-                { name: "Nguyễn Hoàng Long", role: "Head Sommelier", score: 96 },
-                { name: "Trần Mai Anh", role: "Captain", score: 92 },
-                { name: "Phan Anh Tuấn", role: "Sommelier Junior", score: 89 },
-              ].map((staff, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2.5 rounded-xl bg-[#FEFCF7] border border-[#ECE5D8] text-xs">
-                  <div>
-                    <div className="font-bold text-[#0F172A]">{staff.name}</div>
-                    <div className="text-[11px] text-slate-500">{staff.role}</div>
+              <div className="p-3.5 rounded-xl border border-amber-300 bg-[#FFFDF9] flex items-start gap-3">
+                <input type="checkbox" checked readOnly className="mt-0.5 accent-[#C69214] rounded" />
+                <div>
+                  <div className="font-bold text-xs text-[#0F172A]">
+                    SOP-FNB-04_Khoi-tao-chai-vang-Sommelier.pdf
                   </div>
-                  <div className="font-bold text-[#C69214] text-sm">{staff.score}đ</div>
+                  <div className="text-[11px] text-slate-500 mt-0.5">
+                    Quy chuẩn mở/ thử/ phục vụ Bordeaux &amp; kỹ thuật ướp xô đá nhanh 4 phút
+                  </div>
                 </div>
-              ))}
+              </div>
+
+              <div className="p-3.5 rounded-xl border border-amber-300 bg-[#FFFDF9] flex items-start gap-3">
+                <input type="checkbox" checked readOnly className="mt-0.5 accent-[#C69214] rounded" />
+                <div>
+                  <div className="font-bold text-xs text-[#0F172A]">
+                    SOP-FNB-07_Nghe-thuat-Giai-quyet-Vintage-Wine.pdf
+                  </div>
+                  <div className="text-[11px] text-slate-500 mt-0.5">
+                    Nghệ thuật xoa dịu khi khách nghi ngờ mùi vị &amp; giới thiệu niên vụ thay thế
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-xl border border-slate-200 bg-white flex items-start gap-3 opacity-60">
+                <input type="checkbox" disabled className="mt-0.5" />
+                <div>
+                  <div className="font-semibold text-xs text-[#0F172A]">
+                    SOP-FNB-01_Nghi-thuc-Tiep-don-VVIP.pdf
+                  </div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">
+                    Nghi thức cúi chào 15 độ, cách xưng hô quý tộc và bảo mật thông tin bàn
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Version & Metadata */}
-          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 shadow-xs space-y-2 text-xs text-[#64748B]">
-            <div>Người tạo: <strong>Lê Thanh Phong (Corporate Trainer)</strong></div>
-            <div>Phiên bản AI Prompt: <strong>v3.2.0 (GPT-4o / Claude 3.5 Sonnet)</strong></div>
-            <div>Cập nhật lần cuối: <strong>05/11/2026</strong></div>
+          {/* 7. Chủ đề cấm kỵ / Từ khóa vi phạm */}
+          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+            <div className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+              7. CHỦ ĐỀ CẤM KỴ / TỪ KHÓA VI PHẠM
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <span className="px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 text-xs font-semibold flex items-center gap-1.5">
+                <span>Tranh cãi với khách</span>
+                <X className="w-3.5 h-3.5 cursor-pointer" />
+              </span>
+
+              <span className="px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 text-xs font-semibold flex items-center gap-1.5">
+                <span>Đổ lỗi cho nhiệt độ phòng</span>
+                <X className="w-3.5 h-3.5 cursor-pointer" />
+              </span>
+
+              <span className="px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 text-xs font-semibold flex items-center gap-1.5">
+                <span>Tiết lộ giá với chai vang</span>
+                <X className="w-3.5 h-3.5 cursor-pointer" />
+              </span>
+
+              <span className="px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 text-xs font-semibold flex items-center gap-1.5">
+                <span>Từ chối đổi ly</span>
+                <X className="w-3.5 h-3.5 cursor-pointer" />
+              </span>
+            </div>
+
+            <div className="text-xs text-[#C69214] font-semibold cursor-pointer pt-1 hover:underline">
+              + Thêm từ khóa cấm...
+            </div>
+          </div>
+
+          {/* 8. Bộ trọng số đánh giá */}
+          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                8. BỘ TRỌNG SỐ ĐÁNH GIÁ
+              </span>
+              <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+                Có tổng: 100%
+              </span>
+            </div>
+
+            <div className="space-y-2 text-xs">
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between font-medium">
+                <span className="text-slate-700">Kiến thức Thực đơn &amp; Menu Pairing</span>
+                <span className="font-bold text-[#C69214]">35 %</span>
+              </div>
+
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between font-medium">
+                <span className="text-slate-700">Nghi thức Giao tiếp &amp; Tác phong (Etiquette)</span>
+                <span className="font-bold text-[#C69214]">30 %</span>
+              </div>
+
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between font-medium">
+                <span className="text-slate-700">Xử lý tình huống khẩn cấp (Crisis Handling)</span>
+                <span className="font-bold text-[#C69214]">20 %</span>
+              </div>
+
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between font-medium">
+                <span className="text-slate-700">Kỹ năng Upsell &amp; Thuyết phục</span>
+                <span className="font-bold text-[#C69214]">15 %</span>
+              </div>
+            </div>
+          </div>
+
+          {/* 9. Điểm đạt yêu cầu */}
+          <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-2">
+            <div className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+              9. ĐIỂM ĐẠT YÊU CẦU
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-24 p-3 bg-slate-50 border border-slate-200 rounded-xl font-serif text-xl font-bold text-center text-[#0F172A]">
+                80
+              </div>
+              <span className="text-xs text-slate-500 font-medium">/ 100 điểm</span>
+            </div>
           </div>
         </div>
+      </div>
+
+      {/* Bottom Action Footer (Figma SCR-CLI-07) */}
+      <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#ECE5D8]">
+        <Link
+          href={APP_ROUTES.CLIENT_SCENARIO_EDIT(String(scenarioId))}
+          className="min-h-[44px] px-6 py-2.5 bg-white border border-[#CBD5E1] hover:bg-slate-50 text-[#1E293B] text-xs sm:text-sm font-semibold rounded-xl flex items-center gap-2 transition cursor-pointer"
+        >
+          <Edit3 className="w-4 h-4 text-[#C69214]" />
+          <span>Edit</span>
+        </Link>
+
+        <button
+          type="button"
+          onClick={() => alert("Kịch bản đã được xuất bản trực tuyến thành công!")}
+          className="min-h-[44px] px-6 py-2.5 bg-[#C69214] hover:bg-[#B07E0F] text-white text-xs sm:text-sm font-bold rounded-xl flex items-center gap-2 shadow-2xs transition cursor-pointer"
+        >
+          <span>Xuất bản kịch bản</span>
+        </button>
       </div>
     </div>
   );

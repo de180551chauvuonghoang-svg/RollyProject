@@ -6,13 +6,12 @@ import { useParams, useRouter } from "next/navigation";
 import { 
   ArrowLeft, 
   Save, 
-  Bot, 
-  Sliders, 
-  Sparkles, 
-  HelpCircle, 
-  CheckCircle2, 
-  FileText,
-  AlertCircle
+  X, 
+  Check, 
+  ChevronDown, 
+  Clock, 
+  MessageSquare,
+  CheckCircle2
 } from "lucide-react";
 import { ClientHeader } from "@/components/layout/client/ClientHeader";
 import { APP_ROUTES } from "@/constants/routes";
@@ -22,60 +21,43 @@ export default function EditScenarioPage() {
   const router = useRouter();
   const scenarioId = params?.id || "1";
 
-  // Form States
-  const [title, setTitle] = useState("Khách VVIP Phàn nàn Chai Vang có mùi ẩm mốc (TCA Cork Taint)");
-  const [code, setCode] = useState("SCN-FNB-01");
-  const [department, setDepartment] = useState("F&B / Sommelier");
-  const [difficulty, setDifficulty] = useState("Thử thách cao");
-  const [status, setStatus] = useState("active");
-  const [personaName, setPersonaName] = useState("Jean-Paul");
-  const [personaRole, setPersonaRole] = useState("Nhà phê bình ẩm thực Michelin độc lập (62 tuổi, Paris)");
-  const [systemPrompt, setSystemPrompt] = useState(
-    `Bạn là Jean-Paul, 62 tuổi, người Pháp, nhà phê bình ẩm thực Michelin độc lập đang dùng bữa tối tối mật tại nhà hàng Fine Dining cao cấp. Bạn vừa gọi một chai Château Margaux Premier Grand Cru Classé 2010.
-
-Khi Sommelier vừa rót thử cho bạn nếm, bạn ngửi thấy mùi ẩm mốc bìa các tông ướt rất rõ rệt (dấu hiệu điển hình của lỗi nút bần TCA - Cork Taint). Bạn nhăn mặt, đặt ly xuống và phàn nàn một cách lịch sự nhưng cực kỳ nghiêm khắc.
-
-Mục tiêu thử thách của bạn:
-1. Quan sát xem Sommelier có lắng nghe trọn vẹn và không tranh cãi hay không.
-2. Nếu Sommelier xin phép được kiểm tra nút bần và ngửi thử thành kính, hãy cho phép.
-3. Nếu Sommelier nhận lỗi nhẹ nhàng và lập tức đề xuất mở ngay một chai mới cùng niên vụ từ hầm bảo quản nhiệt độ chuẩn, bạn sẽ mỉm cười gật đầu và dịu lại.
-4. Nếu Sommelier bao biện hoặc tỏ thái độ nghi ngờ vị giác của bạn, hãy thể hiện sự thất vọng sâu sắc.`
+  const [title, setTitle] = useState("Bàn VIP Dị ứng nấm & Đổi món");
+  const [code, setCode] = useState("RP-09");
+  const [contextDesc, setContextDesc] = useState(
+    "Bối cảnh tiệc tối riêng tư tại Phòng Hoàng Gia của D'Honneur Salon 02. Thực khách VVIP là một nhà sưu tập lâu năm và có tiếng tăm rượu vang sang chảnh, vừa nếm thử chai Château Margaux 2015 và cho rằng rượu bị bảo quản quá ẩm hoặc tính 21°C thay vì 16–18°C chuẩn. Thực khách tỏ thái độ không hài lòng, nghi ngờ quy trình Cellar Master và yêu cầu Sommelier đổi ngay lập tức chai khác hoặc hoàn tiền toàn bộ thực đơn degustation. AI Persona phải duy trì thái độ kiên định, thử thách sự mềm mỏng, kiến thức định đặc và kỹ năng decanter lạnh của Sommelier."
   );
-
-  // Rubric weights
-  const [weightSop, setWeightSop] = useState(35);
-  const [weightTone, setWeightTone] = useState(25);
-  const [weightProblemSolving, setWeightProblemSolving] = useState(25);
-  const [weightSpeed, setWeightSpeed] = useState(15);
-
-  const totalWeight = weightSop + weightTone + weightProblemSolving + weightSpeed;
+  const [passingScore, setPassingScore] = useState(80);
+  const [weightMenu, setWeightMenu] = useState(35);
+  const [weightEtiquette, setWeightEtiquette] = useState(30);
+  const [weightCrisis, setWeightCrisis] = useState(20);
+  const [weightUpsell, setWeightUpsell] = useState(15);
   const [isSaved, setIsSaved] = useState(false);
+
+  const total = weightMenu + weightEtiquette + weightCrisis + weightUpsell;
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
-    if (totalWeight !== 100) {
-      alert("Tổng trọng số 4 tiêu chí phải bằng đúng 100%!");
-      return;
-    }
     setIsSaved(true);
     setTimeout(() => {
       router.push(APP_ROUTES.CLIENT_SCENARIO_DETAIL(String(scenarioId)));
-    }, 1200);
+    }, 1000);
   };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
-      <ClientHeader breadcrumb={`Kịch bản Role-play AI / Chỉnh sửa SCN-FNB-01`} />
+    <div className="space-y-6">
+      <ClientHeader breadcrumb="Kịch bản &amp; Prompt AI / Chỉnh sửa kịch bản" />
 
-      {/* Navigation Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <Link 
-          href={APP_ROUTES.CLIENT_SCENARIO_DETAIL(String(scenarioId))}
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#64748B] hover:text-[#C69214] transition"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Hủy &amp; Quay lại chi tiết kịch bản</span>
-        </Link>
+      {/* Title with yellow vertical accent bar */}
+      <div className="space-y-1.5">
+        <div className="flex items-center gap-3">
+          <span className="w-1.5 h-7 rounded-full bg-[#C69214]" />
+          <h1 className="font-serif text-2xl sm:text-3xl lg:text-[32px] font-bold text-[#0F172A] tracking-tight">
+            Chỉnh sửa: {title}
+          </h1>
+        </div>
+        <p className="text-xs sm:text-sm text-[#64748B] pl-4 leading-relaxed max-w-4xl">
+          Thiết lập nhân vật thực khách ảo AI, liên kết vector SOP và bộ trọng số đánh giá đa chiều cho chuẩn dịch vụ nhà hàng fine dining.
+        </p>
       </div>
 
       {isSaved && (
@@ -85,226 +67,269 @@ Mục tiêu thử thách của bạn:
         </div>
       )}
 
-      {/* Edit Form */}
+      {/* Form */}
       <form onSubmit={handleSave} className="space-y-6">
-        {/* Section 1: General Info */}
-        <div className="bg-white border border-[#ECE5D8] rounded-2xl p-6 shadow-xs space-y-4">
-          <h2 className="font-serif text-lg font-bold text-[#0F172A] border-b border-[#ECE5D8] pb-3">
-            1. Thông Tin Cơ Bản Kịch Bản
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="sm:col-span-2 space-y-1.5">
-              <label className="text-xs font-bold text-[#0F172A]">Tên kịch bản tình huống:</label>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Left Column (Span 7) */}
+          <div className="lg:col-span-7 space-y-6">
+            {/* 1. Tên kịch bản */}
+            <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                  1. TÊN KỊCH BẢN
+                </label>
+                <span className="font-mono text-xs font-bold text-[#8C6005] bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+                  MÃ: {code}
+                </span>
+              </div>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="w-full min-h-[44px] px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#C69214] transition"
+                className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-[#0F172A] focus:outline-none focus:border-[#C69214]"
               />
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-[#0F172A]">Mã kịch bản (Code):</label>
-              <input
-                type="text"
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
+            {/* 2. Mô tả, bối cảnh */}
+            <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+              <label className="text-xs font-bold text-[#0F172A] uppercase tracking-wider block">
+                2. MÔ TẢ, BỐI CẢNH
+              </label>
+              <textarea
+                rows={7}
+                value={contextDesc}
+                onChange={(e) => setContextDesc(e.target.value)}
                 required
-                className="w-full min-h-[44px] px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#C69214] font-mono transition"
+                className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-[13px] text-slate-700 leading-relaxed focus:outline-none focus:border-[#C69214]"
               />
+              <div className="text-right text-[11px] text-slate-400 font-mono">
+                * {contextDesc.length}/1500 ký tự
+              </div>
+            </div>
+
+            {/* 3. Lựa chọn persona khách hàng */}
+            <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+              <div className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                3. LỰA CHỌN PERSONA KHÁCH HÀNG
+              </div>
+
+              <div className="p-4 rounded-xl border-2 border-[#C69214] bg-[#FFFDF9] flex items-center justify-between gap-3 shadow-2xs">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-12 h-12 rounded-xl bg-slate-900 text-[#E2B755] flex items-center justify-center font-bold text-sm shrink-0">
+                    AP
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-sm text-[#0F172A]">Ngài Arthur Pendleton</span>
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                        KHÓ TÍNH
+                      </span>
+                    </div>
+                    <div className="text-xs text-slate-500 font-medium mt-0.5">
+                      VVIP Connoisseur • Khách quen thân niên • Anh quốc
+                    </div>
+                  </div>
+                </div>
+                <div className="w-5 h-5 rounded-full border-2 border-[#C69214] flex items-center justify-center">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#C69214]" />
+                </div>
+              </div>
+            </div>
+
+            {/* 4. Giới hạn thời lượng */}
+            <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+              <div className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                4. GIỚI HẠN THỜI LƯỢNG &amp; LƯỢT TƯƠNG TÁC
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-amber-50 text-[#C69214] flex items-center justify-center">
+                    <Clock className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-[11px] text-slate-400 font-medium">Thời lượng</div>
+                    <div className="font-bold text-sm text-[#0F172A]">08:00 phút</div>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-amber-50 text-[#C69214] flex items-center justify-center">
+                    <MessageSquare className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-[11px] text-slate-400 font-medium">Lượt thoại tối đa</div>
+                    <div className="font-bold text-sm text-[#0F172A]">10 lượt</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-[#0F172A]">Phòng ban áp dụng:</label>
-              <select
-                value={department}
-                onChange={(e) => setDepartment(e.target.value)}
-                className="w-full min-h-[44px] px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#C69214] transition"
-              >
-                <option value="F&B / Sommelier">F&B / Sommelier</option>
-                <option value="Lễ tân & Tiền sảnh">Lễ tân & Tiền sảnh</option>
-                <option value="Quầy Bar & Lounge">Quầy Bar & Lounge</option>
-                <option value="Bộ phận Bếp">Bộ phận Bếp</option>
-              </select>
+          {/* Right Column (Span 5) */}
+          <div className="lg:col-span-5 space-y-6">
+            {/* 6. Tài liệu SOP */}
+            <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                  6. TÀI LIỆU SOP THAM CHIẾU
+                </span>
+                <span className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
+                  <Check className="w-3.5 h-3.5" /> 2 Tài liệu được chọn
+                </span>
+              </div>
+
+              <div className="space-y-2.5">
+                <div className="p-3.5 rounded-xl border border-amber-300 bg-[#FFFDF9] flex items-start gap-3">
+                  <input type="checkbox" defaultChecked className="mt-0.5 accent-[#C69214] rounded" />
+                  <div>
+                    <div className="font-bold text-xs text-[#0F172A]">
+                      SOP-FNB-04_Khoi-tao-chai-vang-Sommelier.pdf
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-xl border border-amber-300 bg-[#FFFDF9] flex items-start gap-3">
+                  <input type="checkbox" defaultChecked className="mt-0.5 accent-[#C69214] rounded" />
+                  <div>
+                    <div className="font-bold text-xs text-[#0F172A]">
+                      SOP-FNB-07_Nghe-thuat-Giai-quyet-Vintage-Wine.pdf
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-[#0F172A]">Mức độ khó:</label>
-              <select
-                value={difficulty}
-                onChange={(e) => setDifficulty(e.target.value)}
-                className="w-full min-h-[44px] px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#C69214] transition"
-              >
-                <option value="Dễ">Dễ</option>
-                <option value="Trung bình">Trung bình</option>
-                <option value="Thử thách cao">Thử thách cao</option>
-              </select>
+            {/* 7. Từ khóa cấm */}
+            <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+              <div className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                7. CHỦ ĐỀ CẤM KỴ / TỪ KHÓA VI PHẠM
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {["Tranh cãi với khách", "Đổ lỗi cho nhiệt độ phòng", "Tiết lộ giá với chai vang", "Từ chối đổi ly"].map(tag => (
+                  <span key={tag} className="px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 text-xs font-semibold flex items-center gap-1.5">
+                    <span>{tag}</span>
+                    <X className="w-3.5 h-3.5 cursor-pointer" />
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-[#0F172A]">Trạng thái triển khai:</label>
-              <select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-                className="w-full min-h-[44px] px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#C69214] transition"
-              >
-                <option value="active">Đang kích hoạt (Live)</option>
-                <option value="draft">Bản nháp (Draft)</option>
-              </select>
+            {/* 8. Bộ trọng số đánh giá */}
+            <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                  8. BỘ TRỌNG SỐ ĐÁNH GIÁ
+                </span>
+                <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+                  Tổng: {total}%
+                </span>
+              </div>
+
+              <div className="space-y-3 text-xs">
+                <div>
+                  <div className="flex justify-between font-medium mb-1">
+                    <span>Kiến thức Thực đơn &amp; Menu Pairing</span>
+                    <span className="font-bold text-[#C69214]">{weightMenu}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="5"
+                    value={weightMenu}
+                    onChange={(e) => setWeightMenu(parseInt(e.target.value))}
+                    className="w-full accent-[#C69214]"
+                  />
+                </div>
+
+                <div>
+                  <div className="flex justify-between font-medium mb-1">
+                    <span>Nghi thức Giao tiếp &amp; Tác phong (Etiquette)</span>
+                    <span className="font-bold text-[#C69214]">{weightEtiquette}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="5"
+                    value={weightEtiquette}
+                    onChange={(e) => setWeightEtiquette(parseInt(e.target.value))}
+                    className="w-full accent-[#C69214]"
+                  />
+                </div>
+
+                <div>
+                  <div className="flex justify-between font-medium mb-1">
+                    <span>Xử lý tình huống khẩn cấp (Crisis Handling)</span>
+                    <span className="font-bold text-[#C69214]">{weightCrisis}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="5"
+                    value={weightCrisis}
+                    onChange={(e) => setWeightCrisis(parseInt(e.target.value))}
+                    className="w-full accent-[#C69214]"
+                  />
+                </div>
+
+                <div>
+                  <div className="flex justify-between font-medium mb-1">
+                    <span>Kỹ năng Upsell &amp; Thuyết phục</span>
+                    <span className="font-bold text-[#C69214]">{weightUpsell}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="5"
+                    value={weightUpsell}
+                    onChange={(e) => setWeightUpsell(parseInt(e.target.value))}
+                    className="w-full accent-[#C69214]"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* 9. Điểm đạt yêu cầu */}
+            <div className="bg-white border border-[#ECE5D8] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-2">
+              <div className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+                9. ĐIỂM ĐẠT YÊU CẦU
+              </div>
+              <div className="flex items-center gap-3">
+                <input
+                  type="number"
+                  min="50"
+                  max="100"
+                  value={passingScore}
+                  onChange={(e) => setPassingScore(parseInt(e.target.value))}
+                  className="w-24 p-3 bg-slate-50 border border-slate-200 rounded-xl font-serif text-xl font-bold text-center text-[#0F172A]"
+                />
+                <span className="text-xs text-slate-500 font-medium">/ 100 điểm</span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Section 2: AI Persona & Prompt Editor */}
-        <div className="bg-white border border-[#ECE5D8] rounded-2xl p-6 shadow-xs space-y-4">
-          <div className="flex items-center justify-between border-b border-[#ECE5D8] pb-3">
-            <h2 className="font-serif text-lg font-bold text-[#0F172A]">
-              2. Thiết Lập Persona Khách Hàng AI &amp; System Prompt
-            </h2>
-            <span className="text-xs text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 font-semibold flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5 text-[#C69214]" /> AI Voice Enabled
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-[#0F172A]">Tên khách hàng giả lập:</label>
-              <input
-                type="text"
-                value={personaName}
-                onChange={(e) => setPersonaName(e.target.value)}
-                required
-                className="w-full min-h-[44px] px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#C69214] transition"
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-[#0F172A]">Mô tả vai trò &amp; Tính cách:</label>
-              <input
-                type="text"
-                value={personaRole}
-                onChange={(e) => setPersonaRole(e.target.value)}
-                required
-                className="w-full min-h-[44px] px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#C69214] transition"
-              />
-            </div>
-          </div>
-
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <label className="text-xs font-bold text-[#0F172A]">System Prompt định hình phản ứng AI:</label>
-              <span className="text-[11px] text-slate-400 font-mono">{systemPrompt.length} ký tự</span>
-            </div>
-            <textarea
-              rows={8}
-              value={systemPrompt}
-              onChange={(e) => setSystemPrompt(e.target.value)}
-              required
-              className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 font-mono leading-relaxed focus:outline-none focus:border-[#C69214] transition"
-            />
-          </div>
-        </div>
-
-        {/* Section 3: Evaluation Rubrics */}
-        <div className="bg-white border border-[#ECE5D8] rounded-2xl p-6 shadow-xs space-y-4">
-          <div className="flex items-center justify-between border-b border-[#ECE5D8] pb-3">
-            <h2 className="font-serif text-lg font-bold text-[#0F172A]">
-              3. Cấu Hình Trọng Số Đánh Giá (%)
-            </h2>
-            <div className={`text-xs font-bold px-2.5 py-1 rounded-md ${
-              totalWeight === 100 
-                ? "bg-emerald-50 text-emerald-700 border border-emerald-200" 
-                : "bg-rose-50 text-rose-700 border border-rose-200"
-            }`}>
-              Tổng: {totalWeight}% {totalWeight !== 100 && "(Cần bằng 100%)"}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-3.5 rounded-xl border border-slate-200 space-y-1.5">
-              <div className="flex justify-between text-xs font-bold text-[#0F172A]">
-                <span>1. Tuân thủ chuẩn SOP:</span>
-                <span className="text-[#C69214]">{weightSop}%</span>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                step="5"
-                value={weightSop}
-                onChange={(e) => setWeightSop(parseInt(e.target.value))}
-                className="w-full accent-[#C69214] cursor-pointer"
-              />
-            </div>
-
-            <div className="p-3.5 rounded-xl border border-slate-200 space-y-1.5">
-              <div className="flex justify-between text-xs font-bold text-[#0F172A]">
-                <span>2. Ngữ điệu &amp; Thái độ:</span>
-                <span className="text-[#C69214]">{weightTone}%</span>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                step="5"
-                value={weightTone}
-                onChange={(e) => setWeightTone(parseInt(e.target.value))}
-                className="w-full accent-[#C69214] cursor-pointer"
-              />
-            </div>
-
-            <div className="p-3.5 rounded-xl border border-slate-200 space-y-1.5">
-              <div className="flex justify-between text-xs font-bold text-[#0F172A]">
-                <span>3. Kỹ năng xử lý khiếu nại:</span>
-                <span className="text-[#C69214]">{weightProblemSolving}%</span>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                step="5"
-                value={weightProblemSolving}
-                onChange={(e) => setWeightProblemSolving(parseInt(e.target.value))}
-                className="w-full accent-[#C69214] cursor-pointer"
-              />
-            </div>
-
-            <div className="p-3.5 rounded-xl border border-slate-200 space-y-1.5">
-              <div className="flex justify-between text-xs font-bold text-[#0F172A]">
-                <span>4. Tốc độ &amp; Chuyên nghiệp:</span>
-                <span className="text-[#C69214]">{weightSpeed}%</span>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                step="5"
-                value={weightSpeed}
-                onChange={(e) => setWeightSpeed(parseInt(e.target.value))}
-                className="w-full accent-[#C69214] cursor-pointer"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex items-center justify-end gap-3 pt-2">
+        {/* Footer actions */}
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#ECE5D8]">
           <Link
-            href={APP_ROUTES.CLIENT_SCENARIO_DETAIL(String(scenarioId))}
-            className="min-h-[44px] px-5 py-2.5 bg-white hover:bg-slate-50 border border-[#CBD5E1] text-[#1E293B] text-xs sm:text-sm font-semibold rounded-xl transition cursor-pointer"
+            href={APP_ROUTES.CLIENT_SCENARIOS}
+            className="min-h-[44px] px-6 py-2.5 bg-white border border-[#CBD5E1] hover:bg-slate-50 text-[#1E293B] text-xs sm:text-sm font-semibold rounded-xl transition cursor-pointer"
           >
-            Hủy bỏ
+            Lưu bản nháp
           </Link>
+
           <button
             type="submit"
-            className="min-h-[44px] px-6 py-2.5 bg-gradient-to-r from-[#C69214] to-[#B07E0F] hover:from-[#B07E0F] hover:to-[#996D0D] text-white text-xs sm:text-sm font-bold rounded-xl flex items-center gap-2 shadow-xs transition cursor-pointer"
+            className="min-h-[44px] px-6 py-2.5 bg-[#C69214] hover:bg-[#B07E0F] text-white text-xs sm:text-sm font-bold rounded-xl flex items-center gap-2 shadow-2xs transition cursor-pointer"
           >
             <Save className="w-4 h-4" />
-            <span>Lưu thay đổi kịch bản</span>
+            <span>Xuất bản kịch bản</span>
           </button>
         </div>
       </form>
